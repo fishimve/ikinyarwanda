@@ -8,6 +8,7 @@ import 'package:ikinyarwanda/services/dialog_service.dart';
 import 'package:ikinyarwanda/services/navigation_service.dart';
 import 'package:ikinyarwanda/shared/colors.dart';
 import 'package:ikinyarwanda/utils/dialog_manager.dart';
+import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
 import 'locator.dart';
 import 'shared/themes.dart';
@@ -26,7 +27,7 @@ void main() async {
     ],
   );
 
-  final brightness = SchedulerBinding.instance!.window.platformBrightness;
+  final brightness = SchedulerBinding.instance.window.platformBrightness;
   bool isDark = brightness == Brightness.dark;
 
   SystemChrome.setSystemUIOverlayStyle(
@@ -42,6 +43,9 @@ void main() async {
           isDark ? Brightness.light : Brightness.dark,
     ),
   );
+
+  configureApp();
+
   runApp(const Ikinyarwanda());
 }
 
