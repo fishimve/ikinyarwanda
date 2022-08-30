@@ -141,14 +141,14 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.3"
   responsive_builder:
     dependency: "direct main"
     description:
       name: responsive_builder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.1"
+    version: "0.4.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -174,7 +174,14 @@ packages:
       name: stacked
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.5"
+    version: "2.3.15"
+  stacked_core:
+    dependency: transitive
+    description:
+      name: stacked_core
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.4"
   stream_channel:
     dependency: transitive
     description:

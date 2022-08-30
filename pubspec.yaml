@@ -11,16 +11,40 @@ environment:
 dependencies:
   flutter_web_plugins:
     sdk: flutter
-  # flutter:
-  #   sdk: flutter
   get_it: ^7.2.0
-  responsive_builder: ^0.4.1
-  stacked: ^2.2.5
+  responsive_builder: ^0.4.2
+  stacked: ^2.3.15
 
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+#   flutter_launcher_icons: ^0.10.0
+#   flutter_native_splash: ^2.2.8
+
+# flutter_icons:
+#   android: true
+#   ios: true
+#   remove_alpha_ios: true
+#   image_path: "assets/icons/logo.png"
+#   min_sdk_android: 21
+#   adaptive_icon_background: "#FAD201"
+#   adaptive_icon_foreground: "assets/icons/logo.png"
+#   web:
+#     generate: true
+#     image_path: "assets/icons/logo.png"
+#     background_color: "#FAD201"
+#     theme_color: "#FAD201"
+#   windows:
+#     generate: true
+#     image_path: "assets/icons/logo.png"
+#     icon_size: 48 
+
+# flutter_native_splash:
+#   color: "#FAD201"
+#   image: "assets/icons/logo.png"
+#   android: true
+#   ios: true
 
 flutter:
   uses-material-design: true
