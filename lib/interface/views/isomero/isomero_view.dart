@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
 import 'package:ikinyarwanda/locator.dart';
 import 'package:ikinyarwanda/services/navigation_service.dart';
@@ -14,6 +15,7 @@ class IsomeroView extends StatelessWidget {
     return ViewModelBuilder<IsomeroViewModel>.reactive(
       viewModelBuilder: () => IsomeroViewModel(),
       builder: (context, viewModel, child) => Scaffold(
+        appBar: AppBar(title: const TextWiget.headline2('Somethings')),
         body: WebCenteredWidget(child: Container(color: Colors.red)),
       ),
     );

@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:ikinyarwanda/models/igisakuzo.dart';
 import 'package:ikinyarwanda/models/ikeshamvugo.dart';
 import 'package:ikinyarwanda/models/incamarenga.dart';
+import 'package:ikinyarwanda/models/inkuru.dart';
 
 class DataService {
   Future<String> _loadFromAsset(String fileAssetPath) async {
@@ -17,6 +18,29 @@ class DataService {
     return jsonResponse;
   }
 
+  Future<Inkuru?> getInkuruByAuthor(String author) async {
+    const filePath = 'assets/isomero_json.json';
+    final parsedInkurus = await _parseJson(filePath) as List<dynamic>;
+    return parsedInkurus.where((inkuru) => inkuru.author == author).first;
+  }
+
+  Future<Inkuru?> getInkuruById(String id) async {
+    const filePath = 'assets/isomero_json.json';
+    final parsedInkurus = await _parseJson(filePath) as List<dynamic>;
+    return parsedInkurus.where((inkuru) => inkuru.id == id).first;
+  }
+
+  Future<List<Inkuru>> getInkurus() async {
+    const filePath = 'assets/isomero_json.json';
+    final parsedInkurus = await _parseJson(filePath) as List<dynamic>;
+    final inkurus = <Inkuru>[];
+
+    for (var i = 1; i < parsedInkurus.length; i++) {
+      inkurus.add(Inkuru.fromMap(parsedInkurus[i]));
+    }
+    return inkurus;
+  }
+
   Future<List<Igisakuzo>> getIbisakuzo(int level, int randomId) async {
     final filePath = 'assets/imikino_json/ibisakuzo_$level/$randomId.json';
     final parsedIbisakuzo = await _parseJson(filePath) as List<dynamic>;
@@ -25,7 +49,6 @@ class DataService {
     for (var i = 1; i < parsedIbisakuzo.length; i++) {
       ibisakuzo.add(Igisakuzo.fromMap(parsedIbisakuzo[i]['sakwe_$i']));
     }
-
     return ibisakuzo;
   }
 

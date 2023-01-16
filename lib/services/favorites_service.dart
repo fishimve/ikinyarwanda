@@ -1,15 +1,16 @@
 import 'package:ikinyarwanda/locator.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
+import 'package:ikinyarwanda/services/data_service.dart';
 import 'package:stacked/stacked.dart';
 
 import 'localstorage_service.dart';
 
-
 class FavoritesService with ListenableServiceMixin {
   final _storageService = locator<LocalStorageService>();
+  final _dataService = locator<DataService>();
 
   final _reactiveList = ReactiveList<Inkuru>();
-  List<Inkuru> get favoritedStories => _reactiveList;
+  List<Inkuru> get favoritedInkurus => _reactiveList;
 
   final _favoritesIds = <String>{};
 
@@ -24,11 +25,10 @@ class FavoritesService with ListenableServiceMixin {
       _reactiveList.clear();
       _favoritesIds.addAll(favs);
       for (var f in favs) {
-        // TODO
-        // var story = await _firestoreService.getFavoriteStory(f);
-        // if (story != null) {
-        //   _reactiveList.add(story);
-        // }
+        final inkuru = await _dataService.getInkuruById(f);
+        if (inkuru != null) {
+          _reactiveList.add(inkuru);
+        }
       }
     }
   }
@@ -39,8 +39,10 @@ class FavoritesService with ListenableServiceMixin {
 
   void favoriteStory(String id) async {
     _favoritesIds.add(id);
-    // final story = await _firestoreService.getFavoriteStory(id);
-    // _reactiveList.add(story);
+    final inkuru = await _dataService.getInkuruById(id);
+    if (inkuru != null) {
+      _reactiveList.add(inkuru);
+    }
     await _storageService.saveStringListToDisk('favorites', _favoritesIds);
   }
 

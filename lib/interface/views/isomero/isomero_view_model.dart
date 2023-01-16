@@ -9,7 +9,7 @@ class IsomeroViewModel extends ReactiveViewModel {
   final _favoritesService = locator<FavoritesService>();
   final _navigationService = locator<NavigationService>();
 
-  List<Inkuru> get favoriteStories => _favoritesService.favoritedStories;
+  List<Inkuru> get favoriteStories => _favoritesService.favoritedInkurus;
 
   final _stories = <Inkuru>[];
   List<Inkuru> get stories => _stories;
