@@ -3,9 +3,12 @@ import 'views/home_view.dart';
 import 'views/ibisakuzo/ibisakuzo_view.dart';
 import 'views/imigani_migufi/imigani_migufi_view.dart';
 import 'views/incamarenga/incamarenga_view.dart';
+import '../models/inkuru.dart';
+import 'views/isomero/inkuru/inkuru_view.dart';
+import 'views/isomero/tabs/tabs_view.dart';
 import 'widgets/text_widget.dart';
 import 'views/ikeshamvuga/ikeshamvuga_view.dart';
-import '../shared/route_names.dart';
+import 'route_names.dart';
 
 PageRoute _pageRoute({required String routeName, required Widget view}) {
   return MaterialPageRoute(
@@ -20,6 +23,17 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _pageRoute(
         routeName: settings.name!,
         view: const HomeView(),
+      );
+    case tabsViewRoute:
+      return _pageRoute(
+        routeName: settings.name!,
+        view: const TabsView(),
+      );
+    case inkuruViewRoute:
+      final story = settings.arguments as Inkuru;
+      return _pageRoute(
+        routeName: settings.name!,
+        view: InkuruView(inkuru: story),
       );
     case ibisakuzoViewRoute:
       var level = settings.arguments as int;
