@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:ikinyarwanda/interface/widgets/circular_progress_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
@@ -15,7 +14,7 @@ class IncamarengaView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<IncamarengaViewModel>.reactive(
       viewModelBuilder: () => IncamarengaViewModel(),
-      onModelReady: (viewModel) => viewModel.getIkeshamvugo(),
+      onViewModelReady: (viewModel) => viewModel.getIkeshamvugo(),
       builder: (context, viewModel, child) => Scaffold(
         body: viewModel.isBusy
             ? const CircularProgressWidget()

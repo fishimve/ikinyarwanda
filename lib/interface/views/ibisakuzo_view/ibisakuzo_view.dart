@@ -43,7 +43,7 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
   Widget build(BuildContext context) {
     return ViewModelBuilder<IbisakuzoViewModel>.reactive(
       viewModelBuilder: () => IbisakuzoViewModel(),
-      onModelReady: (viewModel) => viewModel.getIbisakuzo(widget.level),
+      onViewModelReady: (viewModel) => viewModel.getIbisakuzo(widget.level),
       builder: (context, viewModel, child) => Scaffold(
         body: viewModel.isBusy
             ? const CircularProgressWidget()
@@ -307,8 +307,7 @@ class _GameOptionState extends State<OptionWidget> {
       ),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          primary: Theme.of(context).primaryColor,
-          shape: RoundedRectangleBorder(
+          foregroundColor: Theme.of(context).primaryColor, shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),

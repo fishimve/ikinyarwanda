@@ -41,7 +41,7 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
   Widget build(BuildContext context) {
     return ViewModelBuilder<IkeshamvugoViewModel>.reactive(
       viewModelBuilder: () => IkeshamvugoViewModel(),
-      onModelReady: (viewModel) => viewModel.getIkeshamvugo(),
+      onViewModelReady: (viewModel) => viewModel.getIkeshamvugo(),
       builder: (context, viewModel, child) => Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         body: viewModel.isBusy

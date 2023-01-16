@@ -16,7 +16,7 @@ class ImiganiMigufiView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ImiganiMigufiViewModel>.reactive(
       viewModelBuilder: () => ImiganiMigufiViewModel(),
-      onModelReady: (viewModel) => viewModel.getImigani(),
+      onViewModelReady: (viewModel) => viewModel.getImigani(),
       builder: (context, viewModel, child) => Scaffold(
         body: viewModel.isBusy
             ? const CircularProgressWidget()
