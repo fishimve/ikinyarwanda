@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  animations: ^2.0.7
   flutter:
     sdk: flutter
   flutter_web_plugins:
@@ -18,8 +19,8 @@ dependencies:
   stacked: ^3.1.0+2
 
 dev_dependencies:
-  flutter_lints: ^1.0.0
   flutter_launcher_icons: ^0.11.0
+  flutter_lints: ^1.0.0
   flutter_native_splash: ^2.2.16
   flutter_test:
     sdk: flutter
@@ -51,7 +52,6 @@ dev_dependencies:
 #   macos:
 #     generate: true
 #     image_path: "assets/icons/ikinyarwanda_logo.png"
-
 flutter:
   uses-material-design: true
 

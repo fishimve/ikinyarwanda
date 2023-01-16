@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 const TextStyle headline1Style = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 28,
+  fontSize: 38,
   fontWeight: FontWeight.w700,
 );
 
 const TextStyle headline2Style = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 22,
+  fontSize: 26,
   fontWeight: FontWeight.w600,
 );
 

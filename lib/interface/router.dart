@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'views/home_view/home_view.dart';
-import 'views/ibisakuzo_view/ibisakuzo_view.dart';
-import 'views/imigani_migufi_view/imigani_migufi_view.dart';
-import 'views/incamarenga_view/incamarenga_view.dart';
+import 'views/home_view.dart';
+import 'views/ibisakuzo/ibisakuzo_view.dart';
+import 'views/imigani_migufi/imigani_migufi_view.dart';
+import 'views/incamarenga/incamarenga_view.dart';
 import 'widgets/text_widget.dart';
 import 'views/ikeshamvuga/ikeshamvuga_view.dart';
 import '../shared/route_names.dart';
