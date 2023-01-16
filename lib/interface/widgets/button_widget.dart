@@ -35,9 +35,10 @@ class ButtonWidget extends StatelessWidget {
                   color: Theme.of(context).backgroundColor,
                 ),
               )
-            : const CircularProgressIndicator(
+            : CircularProgressIndicator(
                 strokeWidth: 5,
-                valueColor: AlwaysStoppedAnimation(Colors.white),
+                valueColor:
+                    AlwaysStoppedAnimation(Theme.of(context).backgroundColor),
               ),
       ),
     );

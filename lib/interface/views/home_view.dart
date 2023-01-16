@@ -2,8 +2,6 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
 import 'package:stacked/stacked.dart';
-import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
-import 'package:ikinyarwanda/shared/ui_helpers.dart';
 
 import 'home_view_model.dart';
 import 'ibisakuzo/ibisakuzo_view.dart';
