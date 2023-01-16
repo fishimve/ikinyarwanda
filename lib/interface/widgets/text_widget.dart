@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ikinyarwanda/shared/colors.dart';
 import 'package:ikinyarwanda/shared/styles.dart';
 
 class TextWiget extends StatelessWidget {
@@ -57,11 +58,11 @@ class TextWiget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var brightness = MediaQuery.of(context).platformBrightness;
-    bool isDarkModeOn = brightness == Brightness.dark;
-    var textColor = isDarkModeOn
-        ? Colors.white.withOpacity(.87)
-        : Colors.black.withOpacity(.87);
+    final isDarkModeOn =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    final textColor =
+        isDarkModeOn ? AppColors.mainTextDark : AppColors.mainTextLight;
+
     return Text(
       text,
       style: textStyle.apply(

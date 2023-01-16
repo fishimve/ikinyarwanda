@@ -4,22 +4,30 @@ import 'package:ikinyarwanda/shared/colors.dart';
 class ThemeConfig {
   static ThemeData lightTheme = ThemeData(
     primaryColor: AppColors.primaryLight,
+    cardColor: AppColors.cardLight,
     scaffoldBackgroundColor: AppColors.backgroundLight,
     backgroundColor: AppColors.backgroundLight,
+    indicatorColor: AppColors.inputLight,
     colorScheme: ColorScheme.fromSwatch().copyWith(
-      secondary: AppColors.primaryLight,
+      secondary: AppColors.secondaryLight,
     ),
-    cardColor: Colors.white,
+    iconTheme: IconThemeData(
+      color: AppColors.bodyTextLight,
+    ),
     brightness: Brightness.light,
   );
   static ThemeData darkTheme = ThemeData(
     primaryColor: AppColors.primaryDark,
+    cardColor: AppColors.cardDark,
     scaffoldBackgroundColor: AppColors.backgroundDark,
     backgroundColor: AppColors.backgroundDark,
-    // colorScheme: ColorScheme.fromSwatch().copyWith(
-    //   secondary: AppColors.primaryDark,
-    // ),
-    cardColor: Colors.black,
-    brightness: Brightness.dark,
+    indicatorColor: AppColors.inputDark,
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondary: AppColors.secondaryDark,
+    ),
+    iconTheme: IconThemeData(
+      color: AppColors.bodyTextDark,
+    ),
+    brightness: Brightness.light,
   );
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -21,10 +20,7 @@ void main() async {
 
   // allow only portrait mode
   SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ],
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
   );
 
   final brightness = SchedulerBinding.instance.window.platformBrightness;
