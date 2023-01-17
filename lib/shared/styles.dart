@@ -14,7 +14,7 @@ const TextStyle headline2Style = TextStyle(
 
 const TextStyle headline3Style = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 18,
+  fontSize: 16,
   fontWeight: FontWeight.w500,
 );
 

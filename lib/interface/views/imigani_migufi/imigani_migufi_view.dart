@@ -40,7 +40,6 @@ class ImiganiMigufiView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      verticalSpaceSmall,
                       Expanded(
                         child: ListView.separated(
                           separatorBuilder: (_, index) => Divider(

@@ -23,35 +23,19 @@ class IncamarengaView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: viewModel.navigatePop,
-                            color: Theme.of(context).primaryColor,
-                            icon: const Icon(Icons.arrow_back),
-                            splashColor: Theme.of(context).primaryColor,
-                          ),
-                          IconButton(
-                            onPressed: viewModel.showAboutDialog,
-                            color: Theme.of(context).primaryColor,
-                            icon: const Icon(Icons.info_outline),
-                            splashColor: Theme.of(context).primaryColor,
-                          ),
-                        ],
-                      ),
                       Padding(
                         padding: basePadding,
-                        child: TextWidget.headline2(
-                          'Incamarenga',
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(25, 0, 25, 8),
-                        child: TextWidget.caption(
-                          'Kandaho kugirango ubone ibisobanuro',
-                          color: Theme.of(context).primaryColor,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            minimumSize: Size.zero,
+                            padding: EdgeInsets.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: viewModel.showAboutDialog,
+                          child: TextWidget.headline1(
+                            'Incamarenga',
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
                       ),
                       Expanded(

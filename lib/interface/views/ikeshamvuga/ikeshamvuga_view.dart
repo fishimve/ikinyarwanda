@@ -67,58 +67,46 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
                         itemBuilder: (context, index) => Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                IconButton(
-                                  onPressed: viewModel.navigatePop,
-                                  color: Theme.of(context).primaryColor,
-                                  icon: const Icon(Icons.arrow_back),
-                                  splashColor: Theme.of(context).primaryColor,
-                                ),
-                                IconButton(
-                                  onPressed: viewModel.showAboutDialog,
-                                  color: Theme.of(context).primaryColor,
-                                  icon: const Icon(Icons.info_outline),
-                                  splashColor: Theme.of(context).primaryColor,
-                                ),
-                              ],
-                            ),
-                            verticalSpaceMedium,
                             Padding(
                               padding: basePadding,
-                              child: TextWidget.headline2(
-                                'Ikeshamvugo',
-                                color: Theme.of(context).primaryColor,
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                  minimumSize: Size.zero,
+                                  padding: EdgeInsets.zero,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                ),
+                                onPressed: viewModel.showAboutDialog,
+                                child: TextWidget.headline1(
+                                  'Ikeshamvugo',
+                                  color: Theme.of(context).primaryColor,
+                                ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(25, 0, 25, 8),
-                              child: TextWidget.caption(
-                                'Kandaho kugirango ubone imvugo inoze',
-                                color: Theme.of(context).primaryColor,
-                              ),
-                            ),
-                            verticalSpaceLarge,
-                            Center(
-                              child: SizedBox(
-                                height: MediaQuery.of(context).size.height / 2,
-                                child: WidgetFlipper(
-                                  frontWidget: AppCustomCard(
-                                    title: viewModel.gameCardFrontTitle,
-                                    flashCard:
-                                        viewModel.ikeshamvugo[index].question,
-                                    firstColor: Theme.of(context).primaryColor,
-                                    secondColor:
-                                        Theme.of(context).backgroundColor,
-                                  ),
-                                  backWidget: AppCustomCard(
-                                    title: viewModel.gameCardBackTitle,
-                                    flashCard:
-                                        viewModel.ikeshamvugo[index].answer,
-                                    firstColor: Theme.of(context).primaryColor,
-                                    secondColor:
-                                        Theme.of(context).backgroundColor,
+                            Expanded(
+                              child: Center(
+                                child: SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height / 2,
+                                  child: WidgetFlipper(
+                                    frontWidget: AppCustomCard(
+                                      title: viewModel.gameCardFrontTitle,
+                                      flashCard:
+                                          viewModel.ikeshamvugo[index].question,
+                                      firstColor:
+                                          Theme.of(context).primaryColor,
+                                      secondColor:
+                                          Theme.of(context).backgroundColor,
+                                    ),
+                                    backWidget: AppCustomCard(
+                                      title: viewModel.gameCardBackTitle,
+                                      flashCard:
+                                          viewModel.ikeshamvugo[index].answer,
+                                      firstColor:
+                                          Theme.of(context).primaryColor,
+                                      secondColor:
+                                          Theme.of(context).backgroundColor,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -153,7 +141,7 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
                         ),
                       if (_isLastPage)
                         Positioned(
-                          bottom: 0.0,
+                          bottom: 10.0,
                           left: 0.0,
                           right: 0.0,
                           child: Padding(
