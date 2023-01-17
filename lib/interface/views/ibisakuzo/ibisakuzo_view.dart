@@ -65,13 +65,56 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
                                 viewModel.ibisakuzoIcumi.length - 1;
                           });
                         },
-                        itemBuilder: (context, index) => IgisakuzoWidget(
-                          igisakuzo: viewModel.ibisakuzoIcumi[index],
-                          navigationPop: viewModel.navigatePop,
-                          showAbout: viewModel.showAboutDialog,
-                          correctScore: viewModel.correctScore,
-                          wrongScore: viewModel.wrongScore,
-                          updateScore: viewModel.updateScore,
+                        itemBuilder: (context, index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: basePadding,
+                              child: TextButton(
+                                style: TextButton.styleFrom(
+                                  minimumSize: Size.zero,
+                                  padding: EdgeInsets.zero,
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                ),
+                                onPressed: viewModel.showAboutDialog,
+                                child: TextWidget.headline1(
+                                  'Sakwe Sakwe?',
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ),
+                            verticalSpaceLarge,
+                            Flexible(
+                              child: IgisakuzoWidget(
+                                igisakuzo: viewModel.ibisakuzoIcumi[index],
+                                updateScore: viewModel.updateScore,
+                              ),
+                            ),
+                            verticalSpaceSmall,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextWidget.caption(
+                                  viewModel.correctScore.toString(),
+                                ),
+                                horizontalSpaceTiny,
+                                const Icon(
+                                  Icons.check,
+                                  size: 18,
+                                ),
+                                horizontalSpaceSmall,
+                                TextWidget.caption(
+                                  viewModel.wrongScore.toString(),
+                                ),
+                                horizontalSpaceTiny,
+                                const Icon(
+                                  Icons.close,
+                                  size: 18,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       if (!_isLastPage)
@@ -101,7 +144,7 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
                         ),
                       if (_isLastPage)
                         Positioned(
-                          bottom: 0.0,
+                          bottom: 10.0,
                           left: 0.0,
                           right: 0.0,
                           child: Padding(
@@ -131,133 +174,72 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
 
 class IgisakuzoWidget extends StatelessWidget {
   final Igisakuzo igisakuzo;
-  final VoidCallback navigationPop;
-  final VoidCallback showAbout;
   final Function(bool) updateScore;
-  final int correctScore;
-  final int wrongScore;
+
   const IgisakuzoWidget({
     Key? key,
     required this.igisakuzo,
-    required this.navigationPop,
-    required this.showAbout,
-    required this.correctScore,
-    required this.wrongScore,
     required this.updateScore,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(
-            minHeight: 200,
-            maxHeight: 320,
-          ),
-          child: Container(
-            color: Theme.of(context).primaryColor,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    IconButton(
-                      onPressed: navigationPop,
-                      color: Theme.of(context).backgroundColor,
-                      icon: const Icon(Icons.arrow_back),
-                      splashColor: Theme.of(context).primaryColor,
-                    ),
-                    const Spacer(),
-                    Icon(
-                      Icons.check,
-                      color: Theme.of(context).backgroundColor,
-                    ),
-                    horizontalSpaceSmall,
-                    TextWidget.body(
-                      correctScore.toString(),
-                      color: Theme.of(context).backgroundColor,
-                    ),
-                    horizontalSpaceMedium,
-                    Icon(
-                      Icons.close,
-                      color: Theme.of(context).errorColor,
-                    ),
-                    horizontalSpaceSmall,
-                    TextWidget.body(
-                      wrongScore.toString(),
-                      color: Theme.of(context).backgroundColor,
-                    ),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: showAbout,
-                      color: Theme.of(context).backgroundColor,
-                      icon: const Icon(Icons.info_outline),
-                      splashColor: Theme.of(context).primaryColor,
-                    ),
-                  ],
+    return Card(
+      elevation: 2,
+      margin: basePadding,
+      color: Theme.of(context).backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 25.0,
+                vertical: 25.0,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(borderRadius),
+                  topRight: Radius.circular(borderRadius),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: basePadding,
-                      child: RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Sakwe Sakwe?\n\n',
-                              style: headline2Style.apply(
-                                color: Theme.of(context).backgroundColor,
-                              ),
-                            ),
-                            TextSpan(
-                              text: igisakuzo.question,
-                              style: headline3Style.apply(
-                                color: Theme.of(context).backgroundColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
+              child: TextWidget.headline2(
+                igisakuzo.question,
+                align: TextAlign.center,
+                color: Theme.of(context).backgroundColor,
+              ),
             ),
           ),
-        ),
-        verticalSpaceTiny,
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              OptionWidget(
-                optionText: igisakuzo.option1,
-                correctAnswer: igisakuzo.correctAnswer,
-                updateScore: updateScore,
-              ),
-              OptionWidget(
-                optionText: igisakuzo.option2,
-                correctAnswer: igisakuzo.correctAnswer,
-                updateScore: updateScore,
-              ),
-              OptionWidget(
-                optionText: igisakuzo.option3,
-                correctAnswer: igisakuzo.correctAnswer,
-                updateScore: updateScore,
-              ),
-              OptionWidget(
-                optionText: igisakuzo.option4,
-                correctAnswer: igisakuzo.correctAnswer,
-                updateScore: updateScore,
-              ),
-            ],
+          verticalSpaceSmall,
+          OptionWidget(
+            optionText: igisakuzo.option1,
+            correctAnswer: igisakuzo.correctAnswer,
+            updateScore: updateScore,
           ),
-        ),
-        verticalSpaceTiny,
-      ],
+          OptionWidget(
+            optionText: igisakuzo.option2,
+            correctAnswer: igisakuzo.correctAnswer,
+            updateScore: updateScore,
+          ),
+          OptionWidget(
+            optionText: igisakuzo.option3,
+            correctAnswer: igisakuzo.correctAnswer,
+            updateScore: updateScore,
+          ),
+          OptionWidget(
+            optionText: igisakuzo.option4,
+            correctAnswer: igisakuzo.correctAnswer,
+            updateScore: updateScore,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -307,7 +289,8 @@ class _GameOptionState extends State<OptionWidget> {
       ),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          foregroundColor: Theme.of(context).primaryColor, shape: RoundedRectangleBorder(
+          foregroundColor: Theme.of(context).primaryColor,
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),

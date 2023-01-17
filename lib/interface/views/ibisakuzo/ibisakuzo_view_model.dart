@@ -50,10 +50,4 @@ class IbisakuzoViewModel extends BaseViewModel {
     notifyListeners();
     setBusy(false);
   }
-
-  void navigatePop() {
-    setBusy(true);
-    _navigationService.pop();
-    setBusy(false);
-  }
 }
