@@ -5,16 +5,15 @@ import 'package:ikinyarwanda/models/igisakuzo.dart';
 import 'package:ikinyarwanda/services/data_service.dart';
 import 'package:ikinyarwanda/services/dialog_service.dart';
 import 'package:ikinyarwanda/locator.dart';
-import 'package:ikinyarwanda/services/navigation_service.dart';
 import 'package:stacked/stacked.dart';
 
 class IbisakuzoViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
-  final _navigationService = locator<NavigationService>();
   final _dataService = locator<DataService>();
 
   var ibisakuzoIcumi = <Igisakuzo>[];
   int? randomId;
+  int? level;
 
   var correctScore = 0;
   var wrongScore = 0;
@@ -38,15 +37,17 @@ class IbisakuzoViewModel extends BaseViewModel {
   }
 
   // generate random number from 1 to 800 because there are 800 available
+  // generate level random number from 1 to 2 because there are 2 levels available
   void _generateRandomNumber() {
     final random = Random();
     randomId = random.nextInt(800) + 1;
+    level = random.nextInt(2) + 1;
   }
 
-  Future<void> getIbisakuzo(int level) async {
+  Future<void> getIbisakuzo() async {
     setBusy(true);
     _generateRandomNumber();
-    ibisakuzoIcumi = await _dataService.getIbisakuzo(level, randomId!);
+    ibisakuzoIcumi = await _dataService.getIbisakuzo(level!, randomId!);
     notifyListeners();
     setBusy(false);
   }

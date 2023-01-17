@@ -2,12 +2,10 @@ import 'package:ikinyarwanda/models/incamarenga.dart';
 import 'package:ikinyarwanda/services/data_service.dart';
 import 'package:ikinyarwanda/services/dialog_service.dart';
 import 'package:ikinyarwanda/locator.dart';
-import 'package:ikinyarwanda/services/navigation_service.dart';
 import 'package:stacked/stacked.dart';
 
 class IncamarengaViewModel extends BaseViewModel {
   final _dialogService = locator<DialogService>();
-  final _navigationService = locator<NavigationService>();
   final _dataService = locator<DataService>();
 
   var incamarenga = <Incamarega>[];

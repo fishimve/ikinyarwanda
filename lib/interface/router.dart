@@ -30,10 +30,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         view: InkuruView(inkuru: story),
       );
     case ibisakuzoViewRoute:
-      var level = settings.arguments as int;
       return _pageRoute(
         routeName: settings.name!,
-        view: IbisakuzoView(level: level),
+        view: const IbisakuzoView(),
       );
     case ikeshamvugoViewRoute:
       return _pageRoute(

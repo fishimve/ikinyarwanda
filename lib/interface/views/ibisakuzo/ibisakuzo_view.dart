@@ -5,15 +5,13 @@ import 'package:ikinyarwanda/interface/widgets/dots_indicator.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
 import 'package:ikinyarwanda/models/igisakuzo.dart';
-import 'package:ikinyarwanda/shared/styles.dart';
 import 'package:ikinyarwanda/shared/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 
 import 'ibisakuzo_view_model.dart';
 
 class IbisakuzoView extends StatefulWidget {
-  final int level;
-  const IbisakuzoView({Key? key, required this.level}) : super(key: key);
+  const IbisakuzoView({Key? key}) : super(key: key);
 
   @override
   _IbisakuzoViewState createState() => _IbisakuzoViewState();
@@ -43,7 +41,7 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
   Widget build(BuildContext context) {
     return ViewModelBuilder<IbisakuzoViewModel>.reactive(
       viewModelBuilder: () => IbisakuzoViewModel(),
-      onViewModelReady: (viewModel) => viewModel.getIbisakuzo(widget.level),
+      onViewModelReady: (viewModel) => viewModel.getIbisakuzo(),
       builder: (context, viewModel, child) => Scaffold(
         body: viewModel.isBusy
             ? const CircularProgressWidget()
@@ -153,7 +151,7 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
                               title: 'Ibindi bisakuzo',
                               busy: viewModel.isBusy,
                               onTap: () async {
-                                await viewModel.getIbisakuzo(widget.level);
+                                await viewModel.getIbisakuzo();
                                 setState(() {
                                   _isLastPage = false;
                                   _currentPage = 0;

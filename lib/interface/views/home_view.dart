@@ -79,7 +79,7 @@ Widget getViewForIndex(int index) {
     case 0:
       return const IsomeroView();
     case 1:
-      return const IbisakuzoView(level: 1);
+      return const IbisakuzoView();
     case 2:
       return const IkeshamvugoView();
     case 3:
