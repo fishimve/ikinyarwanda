@@ -6,6 +6,7 @@ import 'package:stacked/stacked.dart';
 import 'home_view_model.dart';
 import 'ibisakuzo/ibisakuzo_view.dart';
 import 'ikeshamvuga/ikeshamvuga_view.dart';
+import 'imigani_migufi/imigani_migufi_view.dart';
 import 'incamarenga/incamarenga_view.dart';
 import 'isomero/isomero_view.dart';
 
@@ -58,6 +59,10 @@ class HomeView extends StatelessWidget {
                 label: 'Ikeshamvugo',
               ),
               BottomNavigationBarItem(
+                icon: Icon(Icons.token_outlined),
+                label: 'Incamarenga',
+              ),
+              BottomNavigationBarItem(
                 icon: Icon(Icons.storm_outlined),
                 label: 'Imigani',
               ),
@@ -79,6 +84,8 @@ Widget getViewForIndex(int index) {
       return const IkeshamvugoView();
     case 3:
       return const IncamarengaView();
+    case 4:
+      return const ImiganiMigufiView();
     default:
       return const IsomeroView();
   }

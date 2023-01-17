@@ -16,7 +16,16 @@ class IsomeroViewModel extends ReactiveViewModel {
   final _inkurus = <Inkuru>[];
   List<Inkuru> get inkurus => _inkurus;
 
-  List<String> get abanditsi => [
+  List<String> get ubwoko => [
+        'Abana',
+        'Ibyivugo',
+        'Imigani',
+        'Imivugo',
+        'Indirimbo',
+        'Inka',
+        'Ubumenyi',
+        'Urukundo',
+        'Abakuru',
         'Alegisi Kagame',
         'Anastase Shyaka',
         'Déo Mazina',
@@ -38,18 +47,6 @@ class IsomeroViewModel extends ReactiveViewModel {
         'Yozefu Bizuru w\'i Rwamagana',
         'Zeferini Gahamanyi na Francine Uwera'
       ];
-
-  List<String> get ubwoko => [
-        'Abana',
-        'Ibyivugo',
-        'Imigani',
-        'Imivugo',
-        'Indirimbo',
-        'Inka',
-        'Ubumenyi',
-        'Urukundo',
-        'Abakuru'
-      ]..sort();
 
   Future<void> getInkurus() async {
     setBusy(true);
