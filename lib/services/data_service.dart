@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:ikinyarwanda/models/igisakuzo.dart';
 import 'package:ikinyarwanda/models/ikeshamvugo.dart';
@@ -13,30 +13,39 @@ class DataService {
   }
 
   Future<dynamic> _parseJson(String fileAssetPath) async {
-    String jsonString = await _loadFromAsset(fileAssetPath);
-    final jsonResponse = jsonDecode(jsonString);
-    return jsonResponse;
-  }
-
-  Future<Inkuru?> getInkuruByAuthor(String author) async {
-    const filePath = 'assets/isomero_json.json';
-    final parsedInkurus = await _parseJson(filePath) as List<dynamic>;
-    return parsedInkurus.where((inkuru) => inkuru.author == author).first;
+    try {
+      final jsonString = await _loadFromAsset(fileAssetPath);
+      final jsonResponse = jsonDecode(jsonString);
+      return jsonResponse;
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<Inkuru?> getInkuruById(String id) async {
-    const filePath = 'assets/isomero_json.json';
-    final parsedInkurus = await _parseJson(filePath) as List<dynamic>;
-    return parsedInkurus.where((inkuru) => inkuru.id == id).first;
+    final filePath = 'assets/isomero_json/$id.json';
+    final parsed = await _parseJson(filePath) as Map<String, dynamic>;
+    return Inkuru.fromMap(parsed);
   }
 
-  Future<List<Inkuru>> getInkurus() async {
-    const filePath = 'assets/isomero_json.json';
-    final parsedInkurus = await _parseJson(filePath) as List<dynamic>;
+  Future<List<Inkuru>> getInkurus([String? tag]) async {
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+    final manifestMap = json.decode(manifestContent);
+    final inkurusPaths = manifestMap.keys
+        .where((String key) => key.contains('isomero_json/'))
+        .where((String key) => key.contains('.json'))
+        .toList();
     final inkurus = <Inkuru>[];
-
-    for (var i = 1; i < parsedInkurus.length; i++) {
-      inkurus.add(Inkuru.fromMap(parsedInkurus[i]));
+    for (var path in inkurusPaths) {
+      final parsed = await _parseJson(path) as Map<String, dynamic>;
+      if (tag != null) {
+        if (parsed['author'] == tag || (parsed['tags'] as List).contains(tag)) {
+          inkurus.add(Inkuru.fromMap(parsed));
+        } else {
+          continue;
+        }
+      }
+      inkurus.add(Inkuru.fromMap(parsed));
     }
     return inkurus;
   }

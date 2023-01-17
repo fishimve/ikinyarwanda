@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
-import 'package:ikinyarwanda/locator.dart';
-import 'package:ikinyarwanda/services/navigation_service.dart';
-import 'package:stacked/stacked.dart';
 
 import 'isomero_view_model.dart';
 
@@ -14,15 +12,55 @@ class IsomeroView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<IsomeroViewModel>.reactive(
       viewModelBuilder: () => IsomeroViewModel(),
+      onViewModelReady: ((viewModel) => viewModel.getInkurus()),
       builder: (context, viewModel, child) => Scaffold(
-        appBar: AppBar(title: const TextWiget.headline2('Somethings')),
-        body: WebCenteredWidget(child: Container(color: Colors.red)),
+        body: WebCenteredWidget(
+          child: Column(
+            children: [
+              Container(
+                height: 50,
+                padding: const EdgeInsets.only(left: 20),
+                alignment: Alignment.center,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: viewModel.ubwoko.length,
+                          itemBuilder: (_, index) {
+                            return GestureDetector(
+                              onTap: null,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 15.0),
+                                  child: ConstrainedBox(
+                                    constraints:
+                                        const BoxConstraints(minWidth: 30),
+                                    child:
+                                        TextWiget.body(viewModel.ubwoko[index]),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
-
-
 
 // class StoriesView extends StatefulWidget {
 //   final TabsViewModel viewModel;
@@ -68,7 +106,7 @@ class IsomeroView extends StatelessWidget {
 //                     itemBuilder: (context, index) {
 //                       return CreationAwareListItem(
 //                         itemCreated: () {
-                       
+
 //                         },
 //                         child: GestureDetector(
 //                           onTap: () => viewModel.navigateToInkuruView(
@@ -85,61 +123,5 @@ class IsomeroView extends StatelessWidget {
 //               ),
 //             ],
 //           );
-//   }
-// }
-
-
-
-// class TagsWidget extends StatelessWidget {
-//   final List<String> tags;
-//   final List<Inkuru> stories;
-//   final Function(Inkuru) navigateToStory;
-//   final Function(String, [bool isAuthor]) navigateToCategory;
-
-//   const TagsWidget({
-//     Key? key,
-//     required this.tags,
-//     required this.stories,
-//     required this.navigateToStory,
-//     required this.navigateToCategory,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       height: 50,
-//       padding: const EdgeInsets.only(left: 20),
-//       alignment: Alignment.center,
-//       child: Row(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           Expanded(
-//             child: SingleChildScrollView(
-//               scrollDirection: Axis.horizontal,
-//               child: ListView.builder(
-//                 physics: const NeverScrollableScrollPhysics(),
-//                 shrinkWrap: true,
-//                 scrollDirection: Axis.horizontal,
-//                 itemCount: tags.length,
-//                 itemBuilder: (_, index) {
-//                   return GestureDetector(
-//                     onTap: () => navigateToCategory(tags[index]),
-//                     child: Center(
-//                       child: Padding(
-//                         padding: const EdgeInsets.only(right: 15.0),
-//                         child: ConstrainedBox(
-//                           constraints: const BoxConstraints(minWidth: 30),
-//                           child: TextWiget.body(tags[index]),
-//                         ),
-//                       ),
-//                     ),
-//                   );
-//                 },
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
 //   }
 // }

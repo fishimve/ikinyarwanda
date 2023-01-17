@@ -1,6 +1,7 @@
 import 'package:ikinyarwanda/interface/route_names.dart';
 import 'package:ikinyarwanda/locator.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
+import 'package:ikinyarwanda/services/data_service.dart';
 import 'package:ikinyarwanda/services/favorites_service.dart';
 import 'package:ikinyarwanda/services/navigation_service.dart';
 import 'package:stacked/stacked.dart';
@@ -8,70 +9,59 @@ import 'package:stacked/stacked.dart';
 class IsomeroViewModel extends ReactiveViewModel {
   final _favoritesService = locator<FavoritesService>();
   final _navigationService = locator<NavigationService>();
+  final _dataService = locator<DataService>();
 
   List<Inkuru> get favoriteStories => _favoritesService.favoritedInkurus;
 
-  final _stories = <Inkuru>[];
-  List<Inkuru> get stories => _stories;
+  final _inkurus = <Inkuru>[];
+  List<Inkuru> get inkurus => _inkurus;
 
-  final _authors = <String>{};
-  List<String> get authors => _authors.toList();
+  List<String> get abanditsi => [
+        'Alegisi Kagame',
+        'Anastase Shyaka',
+        'Déo Mazina',
+        'Habyalimana Bangambiki',
+        'J.B Habimana',
+        'Jean Bonaventure Habimana',
+        'Jean Pierre Kabano',
+        'Jyamubandi Deo',
+        'Kajuga Jerome',
+        'Karangwa Anaclet',
+        'Kimenyi Alexandre',
+        'Mupenzi Venuste',
+        'Ngarambe François-Xavier',
+        'Placide Kalisa',
+        'Rugamba Sipiriyani',
+        'Sibomana Antoine',
+        'Sipiriyani Rugamba',
+        'Tuyisenge Olivier',
+        'Yozefu Bizuru w\'i Rwamagana',
+        'Zeferini Gahamanyi na Francine Uwera'
+      ];
 
-  final _categories = <String>{};
-  List<String> get categories => _categories.toList()..sort();
+  List<String> get ubwoko => [
+        'Abana',
+        'Ibyivugo',
+        'Imigani',
+        'Imivugo',
+        'Indirimbo',
+        'Inka',
+        'Ubumenyi',
+        'Urukundo',
+        'Abakuru'
+      ]..sort();
 
-  Future<void> getTagsAndStories() async {
-    await _favoritesService.initSetup();
-    _setTagsAndAuthors();
-    _listenToStories();
-  }
-
-  void _setTagsAndAuthors() {
+  Future<void> getInkurus() async {
     setBusy(true);
-
-    // final categories = langs
-    //     .map((l) => l.storiesTags)
-    //     .toList()
-    //     .fold<List<String>>([], (curr, next) => [...curr, ...next]).toSet();
-
-    // final authors = langs
-    //     .map((l) => l.authors)
-    //     .toList()
-    //     .fold<List<String>>([], (curr, next) => [...curr, ...next]).toSet();
-    _categories.clear();
-    _categories.addAll(categories);
-    _authors.clear();
-    _authors.addAll(authors);
-    notifyListeners();
+    await _favoritesService.initSetup();
+    inkurus.addAll(await _dataService.getInkurus());
     setBusy(false);
   }
 
-  void _listenToStories() async {
-    setBusy(true);
-    // _firestoreService
-    //     .listenToStoriesRealTime(selectedLanguages)
-    //     .listen((storiesData) {
-    //   List<Inkuru>? updatedStories = storiesData;
-    //   if (updatedStories != null && updatedStories.isNotEmpty) {
-    //     _stories.addAll(updatedStories);
-    //     notifyListeners();
-    //   }
-    //   setBusy(false);
-    // });
-  }
-
   void navigateToInkuruView(Inkuru inkuru) async {
-    await _navigationService.navigateTo(inkuruViewRoute, arguments: Inkuru);
-    notifyListeners();
-  }
-
-  void navigateToCategoryView(String category,
-      [bool useAuthors = false]) async {
-    // await _navigationService.navigateTo(
-    //   categoryViewRoute,
-    //   arguments: {'category': category, 'useAuthors': useAuthors},
-    // );
-    notifyListeners();
+    setBusy(true);
+    await _navigationService.navigateTo(inkuruViewRoute, arguments: inkuru);
+    setBusy(false);
   }
 
   @override

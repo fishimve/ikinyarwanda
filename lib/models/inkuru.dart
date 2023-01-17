@@ -15,4 +15,7 @@ class Inkuru {
         tags = map['tags'] == null
             ? []
             : map['tags'].map<String>((t) => t.toString()).toList();
+
+  @override
+  String toString() => ''''id': $id , 'title': $title, 'author': $author\n''';
 }

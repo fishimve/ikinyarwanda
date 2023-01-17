@@ -63,6 +63,7 @@ flutter:
     - assets/imikino_json/ikeshamvugo/
     - assets/imikino_json/imiganimigufi/
     - assets/imikino_json/incamarenga/
+    - assets/isomero_json/
 
   fonts:
     - family: OpenSans

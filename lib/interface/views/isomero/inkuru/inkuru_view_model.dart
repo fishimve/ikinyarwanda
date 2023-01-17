@@ -16,7 +16,7 @@ class InkuruViewModel extends ReactiveViewModel {
   }
 
   void handleFavorite(
-    String InkuruId,
+    String inkuruId,
     String dialogConfirm,
     String removeFromFavs,
     String confirm,
