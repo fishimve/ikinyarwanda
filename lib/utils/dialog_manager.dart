@@ -25,11 +25,11 @@ class _DialogManagerState extends State<DialogManager> {
         child: AlertDialog(
           backgroundColor: Theme.of(context).backgroundColor,
           elevation: 1,
-          title: TextWiget.headline2(
+          title: TextWidget.headline2(
             request.title,
             color: Theme.of(context).primaryColor,
           ),
-          content: TextWiget.caption(request.description),
+          content: TextWidget.caption(request.description),
           actions: [
             if (isComfirmationDialog)
               TextButton(
@@ -43,7 +43,7 @@ class _DialogManagerState extends State<DialogManager> {
                     borderRadius: BorderRadius.circular(borderRadius),
                   ),
                 ),
-                child: TextWiget.body(
+                child: TextWidget.body(
                   request.cancelTitle!,
                   color: Theme.of(context).primaryColor,
                 ),
@@ -58,7 +58,7 @@ class _DialogManagerState extends State<DialogManager> {
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
               ),
-              child: TextWiget.body(
+              child: TextWidget.body(
                 request.buttonTitle,
                 color: Theme.of(context).primaryColor,
               ),

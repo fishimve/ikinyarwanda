@@ -30,7 +30,7 @@ class InkuruView extends StatelessWidget {
               ),
               onPressed: viewModel.navigatorPop,
             ),
-            title: TextWiget.headline3(inkuru.title),
+            title: TextWidget.headline3(inkuru.title),
             actions: [
               IconButton(
                 onPressed:null,
@@ -53,7 +53,7 @@ class InkuruView extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                       horizontal: 30.0,
                     ),
-                    child: TextWiget.body(inkuru.content),
+                    child: TextWidget.body(inkuru.content),
                   ),
                   if (inkuru.author != '-') ...[
                     verticalSpaceMedium,
@@ -63,7 +63,7 @@ class InkuruView extends StatelessWidget {
                       ),
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: TextWiget.body(
+                        child: TextWidget.body(
                           inkuru.author,
                           fontWeight: 2,
                         ),
@@ -78,7 +78,7 @@ class InkuruView extends StatelessWidget {
                       ),
                       child: Align(
                         alignment: Alignment.bottomRight,
-                        child: TextWiget.caption(
+                        child: TextWidget.caption(
                           inkuru.tags.join(', '),
                         ),
                       ),

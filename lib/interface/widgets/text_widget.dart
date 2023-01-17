@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/shared/colors.dart';
 import 'package:ikinyarwanda/shared/styles.dart';
 
-class TextWiget extends StatelessWidget {
+class TextWidget extends StatelessWidget {
   final String text;
   final TextStyle textStyle;
   final TextAlign textAlign;
   final Color? color;
 
-  const TextWiget.headline1(
+  const TextWidget.headline1(
     this.text, {
     this.color,
     Key? key,
@@ -17,7 +17,7 @@ class TextWiget extends StatelessWidget {
         textAlign = align,
         super(key: key);
 
-  const TextWiget.headline2(
+  const TextWidget.headline2(
     this.text, {
     this.color,
     Key? key,
@@ -26,7 +26,7 @@ class TextWiget extends StatelessWidget {
         textAlign = align,
         super(key: key);
 
-  const TextWiget.headline3(
+  const TextWidget.headline3(
     this.text, {
     this.color,
     Key? key,
@@ -35,19 +35,20 @@ class TextWiget extends StatelessWidget {
         textAlign = align,
         super(key: key);
 
-  TextWiget.body(
+  TextWidget.body(
     this.text, {
     this.color,
     Key? key,
     TextAlign align = TextAlign.start,
     int? fontWeight,
+    Color? bgColor,
   })  : textStyle = bodyStyle.apply(
           fontWeightDelta: fontWeight ?? 0,
+          backgroundColor: bgColor,
         ),
         textAlign = align,
         super(key: key);
-
-  const TextWiget.caption(
+  const TextWidget.caption(
     this.text, {
     this.color,
     Key? key,
@@ -62,7 +63,6 @@ class TextWiget extends StatelessWidget {
         MediaQuery.of(context).platformBrightness == Brightness.dark;
     final textColor =
         isDarkModeOn ? AppColors.mainTextDark : AppColors.mainTextLight;
-
     return Text(
       text,
       style: textStyle.apply(

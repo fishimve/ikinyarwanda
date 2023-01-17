@@ -42,14 +42,14 @@ class IncamarengaView extends StatelessWidget {
                       ),
                       Padding(
                         padding: basePadding,
-                        child: TextWiget.headline2(
+                        child: TextWidget.headline2(
                           'Incamarenga',
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(25, 0, 25, 8),
-                        child: TextWiget.caption(
+                        child: TextWidget.caption(
                           'Kandaho kugirango ubone ibisobanuro',
                           color: Theme.of(context).primaryColor,
                         ),
@@ -68,11 +68,11 @@ class IncamarengaView extends StatelessWidget {
                             ),
                             childrenPadding:
                                 const EdgeInsets.fromLTRB(12, 0, 12, 12),
-                            title: TextWiget.headline3(
+                            title: TextWidget.headline3(
                               viewModel.incamarenga[index].statement,
                             ),
                             children: [
-                              TextWiget.body(
+                              TextWidget.body(
                                 viewModel.incamarenga[index].explaination,
                               ),
                             ],

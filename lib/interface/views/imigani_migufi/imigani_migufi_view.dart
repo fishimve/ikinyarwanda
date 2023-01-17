@@ -25,28 +25,19 @@ class ImiganiMigufiView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            onPressed: viewModel.navigatePop,
-                            color: Theme.of(context).primaryColor,
-                            icon: const Icon(Icons.arrow_back),
-                            splashColor: Theme.of(context).primaryColor,
-                          ),
-                          IconButton(
-                            onPressed: viewModel.showAboutDialog,
-                            color: Theme.of(context).primaryColor,
-                            icon: const Icon(Icons.info_outline),
-                            splashColor: Theme.of(context).primaryColor,
-                          ),
-                        ],
-                      ),
                       Padding(
                         padding: basePadding,
-                        child: TextWiget.headline2(
-                          'Imigani migufi',
-                          color: Theme.of(context).primaryColor,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            minimumSize: Size.zero,
+                            padding: EdgeInsets.zero,
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: viewModel.showAboutDialog,
+                          child: TextWidget.headline1(
+                            'Imigani migufi',
+                            color: Theme.of(context).primaryColor,
+                          ),
                         ),
                       ),
                       verticalSpaceSmall,
@@ -94,13 +85,8 @@ class ListItem extends StatelessWidget {
       alignment: Alignment.centerLeft,
       padding: basePadding,
       child: title == loadingIndicatorTitle
-          ? CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(
-                Theme.of(context).primaryColor,
-              ),
-              strokeWidth: 5,
-            )
-          : TextWiget.body(title),
+          ? const CircularProgressWidget()
+          : TextWidget.body(title),
     );
   }
 }

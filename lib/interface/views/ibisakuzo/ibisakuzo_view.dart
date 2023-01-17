@@ -174,7 +174,7 @@ class IgisakuzoWidget extends StatelessWidget {
                       color: Theme.of(context).backgroundColor,
                     ),
                     horizontalSpaceSmall,
-                    TextWiget.body(
+                    TextWidget.body(
                       correctScore.toString(),
                       color: Theme.of(context).backgroundColor,
                     ),
@@ -184,7 +184,7 @@ class IgisakuzoWidget extends StatelessWidget {
                       color: Theme.of(context).errorColor,
                     ),
                     horizontalSpaceSmall,
-                    TextWiget.body(
+                    TextWidget.body(
                       wrongScore.toString(),
                       color: Theme.of(context).backgroundColor,
                     ),
@@ -332,7 +332,7 @@ class _GameOptionState extends State<OptionWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: TextWiget.body(
+                child: TextWidget.body(
                   widget.optionText,
                   color: _isCorrect
                       ? Theme.of(context).backgroundColor

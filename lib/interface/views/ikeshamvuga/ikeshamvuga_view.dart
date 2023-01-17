@@ -87,14 +87,14 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
                             verticalSpaceMedium,
                             Padding(
                               padding: basePadding,
-                              child: TextWiget.headline2(
+                              child: TextWidget.headline2(
                                 'Ikeshamvugo',
                                 color: Theme.of(context).primaryColor,
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(25, 0, 25, 8),
-                              child: TextWiget.caption(
+                              child: TextWidget.caption(
                                 'Kandaho kugirango ubone imvugo inoze',
                                 color: Theme.of(context).primaryColor,
                               ),
@@ -219,7 +219,7 @@ class AppCustomCard extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               child: Center(
-                child: TextWiget.headline2(
+                child: TextWidget.headline2(
                   title,
                   align: TextAlign.center,
                   color: Theme.of(context).backgroundColor,
@@ -232,7 +232,7 @@ class AppCustomCard extends StatelessWidget {
             child: Center(
               child: Padding(
                 padding: basePadding,
-                child: TextWiget.headline2(
+                child: TextWidget.headline2(
                   flashCard,
                   align: TextAlign.center,
                   color: Theme.of(context).primaryColor,

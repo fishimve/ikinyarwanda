@@ -46,7 +46,7 @@ class IsomeroView extends StatelessWidget {
                                         child: ConstrainedBox(
                                           constraints: const BoxConstraints(
                                               minWidth: 30),
-                                          child: TextWiget.body(
+                                          child: TextWidget.body(
                                               viewModel.ubwoko[index]),
                                         ),
                                       ),
@@ -110,14 +110,14 @@ class InkuruSummaryWidget extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: TextWiget.headline3(inkuru.title),
+              child: TextWidget.headline3(inkuru.title),
             ),
           ),
           Align(
             alignment: Alignment.topLeft,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              child: TextWiget.body(summary),
+              child: TextWidget.body(summary),
             ),
           ),
           if (inkuru.author != '')
@@ -125,14 +125,14 @@ class InkuruSummaryWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: TextWiget.caption(inkuru.author),
+                child: TextWidget.caption(inkuru.author),
               ),
             ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: TextWiget.caption(inkuru.tags.join(', ')),
+              child: TextWidget.caption(inkuru.tags.join(', ')),
             ),
           ),
         ],
