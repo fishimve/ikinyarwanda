@@ -7,11 +7,13 @@ import 'inkuru_summary_widget.dart';
 class SearchWidget extends SearchDelegate<Inkuru?> {
   final String searchLabel;
   final List<Inkuru> inkurus;
+  final List<String> favorites;
   final Function(Inkuru) readInkuru;
 
   SearchWidget({
     required this.readInkuru,
     required this.inkurus,
+    required this.favorites,
     required this.searchLabel,
   });
 
@@ -36,7 +38,7 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
         icon: Icon(
           Icons.clear,
           color: Theme.of(context).primaryColor,
-          size: 25.0,
+          size: 22.0,
         ),
         onPressed: () {
           query = '';
@@ -51,7 +53,7 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
       icon: Icon(
         Icons.arrow_back,
         color: Theme.of(context).primaryColor,
-        size: 25.0,
+        size: 22.0,
       ),
       onPressed: () {
         close(context, null);
@@ -73,7 +75,10 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
             await readInkuru(a);
             close(context, a);
           },
-          child: InkuruSummaryWidget(inkuru: a),
+          child: InkuruSummaryWidget(
+            inkuru: a,
+            isFavorite: favorites.contains(a.id),
+          ),
         );
       },
     );
@@ -93,7 +98,10 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
             await readInkuru(a);
             close(context, a);
           },
-          child: InkuruSummaryWidget(inkuru: a),
+          child: InkuruSummaryWidget(
+            inkuru: a,
+            isFavorite: favorites.contains(a.id),
+          ),
         );
       },
     );

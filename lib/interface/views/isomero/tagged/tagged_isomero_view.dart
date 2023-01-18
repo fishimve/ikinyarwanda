@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:stacked/stacked.dart';
 
-import 'isomero2_view_model.dart';
+import 'tagged_isomero_view_model.dart';
 
-class Isomero2View extends StatelessWidget {
+class TaggedIsomeroView extends StatelessWidget {
   final String tag;
-  const Isomero2View({
+  const TaggedIsomeroView({
     Key? key,
     required this.tag,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<Isomero2ViewModel>.reactive(
-      viewModelBuilder: () => Isomero2ViewModel(),
+    return ViewModelBuilder<TaggedIsomeroViewModel>.reactive(
+      viewModelBuilder: () => TaggedIsomeroViewModel(),
       createNewViewModelOnInsert: true,
       builder: (context, viewModel, child) {
         return Scaffold(
@@ -24,10 +24,10 @@ class Isomero2View extends StatelessWidget {
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
-                size: 25,
+                size: 30,
                 color: Theme.of(context).primaryColor,
               ),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: viewModel.navigateBack,
             ),
             title: TextWidget.headline1(tag),
             actions: [
@@ -45,7 +45,7 @@ class Isomero2View extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.search,
-                  size: 24.0,
+                  size: 30.0,
                   color: Theme.of(context).primaryColor,
                 ),
               ),

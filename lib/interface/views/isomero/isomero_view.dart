@@ -1,10 +1,8 @@
+import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/interface/widgets/circular_progress_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/inkuru_summary_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/search_widget.dart';
-import 'package:ikinyarwanda/models/inkuru.dart';
-import 'package:ikinyarwanda/shared/ui_helpers.dart';
-import 'package:stacked/stacked.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
 
@@ -69,7 +67,9 @@ class IsomeroView extends StatelessWidget {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: viewModel.ubwoko.length,
                                 itemBuilder: (_, index) => GestureDetector(
-                                  onTap: null,
+                                  onTap: () =>
+                                      viewModel.navigateToTaggedIsomeroView(
+                                          viewModel.ubwoko[index]),
                                   child: Center(
                                     child: Padding(
                                       padding:
@@ -79,17 +79,9 @@ class IsomeroView extends StatelessWidget {
                                           minWidth: 30,
                                         ),
                                         child: index == 0
-                                            ? Center(
-                                                child: IconButton(
-                                                  padding: EdgeInsets.zero,
-                                                  constraints:
-                                                      const BoxConstraints(),
-                                                  onPressed: () {},
-                                                  icon: const Icon(
-                                                    Icons.bookmark_border,
-                                                    size: 22.0,
-                                                  ),
-                                                ),
+                                            ? const Icon(
+                                                Icons.bookmark_border,
+                                                size: 22.0,
                                               )
                                             : TextWidget.body(
                                                 viewModel.ubwoko[index],
@@ -110,6 +102,7 @@ class IsomeroView extends StatelessWidget {
                                 delegate: SearchWidget(
                                   inkurus: viewModel.inkurus,
                                   readInkuru: viewModel.navigateToInkuruView,
+                                  favorites: viewModel.favorites,
                                   searchLabel: 'Shakisha',
                                 ),
                               );
@@ -140,6 +133,9 @@ class IsomeroView extends StatelessWidget {
                           ),
                           child: InkuruSummaryWidget(
                             inkuru: viewModel.inkurus[index],
+                            isFavorite: viewModel.favorites.contains(
+                              viewModel.inkurus[index].id,
+                            ),
                           ),
                         ),
                       ),

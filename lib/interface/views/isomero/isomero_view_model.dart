@@ -13,7 +13,8 @@ class IsomeroViewModel extends ReactiveViewModel {
   final _dialogService = locator<DialogService>();
   final _dataService = locator<DataService>();
 
-  List<Inkuru> get favoriteStories => _favoritesService.favoritedInkurus;
+  List<String> get favorites =>
+      _favoritesService.favoritedInkurus.map((i) => i.id).toList();
 
   final _inkurus = <Inkuru>[];
   List<Inkuru> get inkurus => _inkurus;
@@ -58,13 +59,19 @@ class IsomeroViewModel extends ReactiveViewModel {
     setBusy(false);
   }
 
-  void navigateToInkuruView(Inkuru inkuru) async {
+  Future<void> navigateToInkuruView(Inkuru inkuru) async {
     setBusy(true);
     await _navigationService.navigateTo(inkuruViewRoute, arguments: inkuru);
     setBusy(false);
   }
 
-  void showAboutDialog() async {
+  Future<void> navigateToTaggedIsomeroView(String tag) async {
+    setBusy(true);
+    await _navigationService.navigateTo(taggedIsomeroViewRoute, arguments: tag);
+    setBusy(false);
+  }
+
+  Future<void> showAboutDialog() async {
     await _dialogService.showDialog(
       title: 'Ubuvanganzo',
       description:

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
+import 'package:ikinyarwanda/shared/ui_helpers.dart';
 
 import 'text_widget.dart';
 
 class InkuruSummaryWidget extends StatelessWidget {
   final Inkuru inkuru;
+  final bool isFavorite;
 
   const InkuruSummaryWidget({
     Key? key,
     required this.inkuru,
+    required this.isFavorite,
   }) : super(key: key);
 
   @override
@@ -39,6 +42,14 @@ class InkuruSummaryWidget extends StatelessWidget {
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
+                  if (isFavorite) ...[
+                    const TextWidget.caption(' | '),
+                    Icon(
+                      Icons.bookmark,
+                      size: 14,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ]
                 ],
               ),
             ),
