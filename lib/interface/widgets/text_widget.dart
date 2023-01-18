@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ikinyarwanda/shared/colors.dart';
 import 'package:ikinyarwanda/shared/styles.dart';
 
 class TextWidget extends StatelessWidget {
@@ -58,17 +57,9 @@ class TextWidget extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final isDarkModeOn =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
-    final textColor =
-        isDarkModeOn ? AppColors.mainTextDark : AppColors.mainTextLight;
-    return Text(
-      text,
-      style: textStyle.apply(
-        color: color ?? textColor,
-      ),
-      textAlign: textAlign,
-    );
-  }
+  Widget build(BuildContext context) => Text(
+        text,
+        style: textStyle.apply(color: color),
+        textAlign: textAlign,
+      );
 }

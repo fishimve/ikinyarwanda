@@ -18,73 +18,54 @@ class ImiganiMigufiView extends StatelessWidget {
       viewModelBuilder: () => ImiganiMigufiViewModel(),
       onViewModelReady: (viewModel) => viewModel.getImigani(),
       builder: (context, viewModel, child) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: TextButton(
+            style: TextButton.styleFrom(
+              minimumSize: Size.zero,
+              padding: EdgeInsets.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            onPressed: viewModel.showAboutDialog,
+            child: const TextWidget.headline1('Imigani migufi'),
+          ),
+        ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()
             : WebCenteredWidget(
-                child: SafeArea(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: basePadding,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: Size.zero,
-                            padding: EdgeInsets.zero,
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                          onPressed: viewModel.showAboutDialog,
-                          child: TextWidget.headline1(
-                            'Imigani migufi',
-                            color: Theme.of(context).primaryColor,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: ListView.separated(
+                        separatorBuilder: (_, index) => const Divider(
+                          indent: 25,
+                          endIndent: 25,
+                        ),
+                        primary: true,
+                        shrinkWrap: true,
+                        itemCount: viewModel.imigani.length,
+                        itemBuilder: (context, index) => CreationAwareListItem(
+                          itemCreated: () {
+                            SchedulerBinding.instance.addPostFrameCallback(
+                              (duration) => viewModel.handleItemCreated(index),
+                            );
+                          },
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            padding: basePadding,
+                            child: viewModel.imigani[index] ==
+                                    loadingIndicatorTitle
+                                ? const CircularProgressWidget()
+                                : TextWidget.body(viewModel.imigani[index]),
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: ListView.separated(
-                          separatorBuilder: (_, index) => const Divider(
-                            indent: 25,
-                            endIndent: 25,
-                          ),
-                          primary: true,
-                          shrinkWrap: true,
-                          itemCount: viewModel.imigani.length,
-                          itemBuilder: (context, index) =>
-                              CreationAwareListItem(
-                            itemCreated: () {
-                              SchedulerBinding.instance.addPostFrameCallback(
-                                (duration) =>
-                                    viewModel.handleItemCreated(index),
-                              );
-                            },
-                            child: ListItem(title: viewModel.imigani[index]),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
       ),
-    );
-  }
-}
-
-class ListItem extends StatelessWidget {
-  final String title;
-  const ListItem({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.centerLeft,
-      padding: basePadding,
-      child: title == loadingIndicatorTitle
-          ? const CircularProgressWidget()
-          : TextWidget.body(title),
     );
   }
 }

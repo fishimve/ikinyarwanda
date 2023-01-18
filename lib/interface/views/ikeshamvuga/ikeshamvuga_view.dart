@@ -43,7 +43,18 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
       viewModelBuilder: () => IkeshamvugoViewModel(),
       onViewModelReady: (viewModel) => viewModel.getIkeshamvugo(),
       builder: (context, viewModel, child) => Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+          elevation: 0,
+          title: TextButton(
+            style: TextButton.styleFrom(
+              minimumSize: Size.zero,
+              padding: EdgeInsets.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            onPressed: viewModel.showAboutDialog,
+            child: const TextWidget.headline1('Ikeshamvugo'),
+          ),
+        ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()
             : WebCenteredWidget(
@@ -64,102 +75,73 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
                                 viewModel.ikeshamvugo.length - 1;
                           });
                         },
-                        itemBuilder: (context, index) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: basePadding,
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  minimumSize: Size.zero,
-                                  padding: EdgeInsets.zero,
-                                  tapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                ),
-                                onPressed: viewModel.showAboutDialog,
-                                child: TextWidget.headline1(
-                                  'Ikeshamvugo',
-                                  color: Theme.of(context).primaryColor,
-                                ),
+                        itemBuilder: (context, index) => Center(
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.height / 2,
+                            child: WidgetFlipper(
+                              frontWidget: AppCustomCard(
+                                title: viewModel.gameCardFrontTitle,
+                                flashCard:
+                                    viewModel.ikeshamvugo[index].question,
                               ),
-                            ),
-                            Expanded(
-                              child: Center(
-                                child: SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height / 2,
-                                  child: WidgetFlipper(
-                                    frontWidget: AppCustomCard(
-                                      title: viewModel.gameCardFrontTitle,
-                                      flashCard:
-                                          viewModel.ikeshamvugo[index].question,
-                                      firstColor:
-                                          Theme.of(context).primaryColor,
-                                      secondColor:
-                                          Theme.of(context).backgroundColor,
-                                    ),
-                                    backWidget: AppCustomCard(
-                                      title: viewModel.gameCardBackTitle,
-                                      flashCard:
-                                          viewModel.ikeshamvugo[index].answer,
-                                      firstColor:
-                                          Theme.of(context).primaryColor,
-                                      secondColor:
-                                          Theme.of(context).backgroundColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      if (!_isLastPage)
-                        Positioned(
-                          bottom: 0.0,
-                          left: 0.0,
-                          right: 0.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(
-                              10,
-                            ),
-                            child: Center(
-                              child: DotsIndicator(
-                                controller: _controller,
-                                itemCount: viewModel.ikeshamvugo.length,
-                                color: Theme.of(context).primaryColor,
-                                onPageSelected: (int page) {
-                                  _controller.animateToPage(
-                                    page,
-                                    duration: _duration,
-                                    curve: _curve,
-                                  );
-                                },
+                              backWidget: AppCustomCard(
+                                title: viewModel.gameCardBackTitle,
+                                flashCard: viewModel.ikeshamvugo[index].answer,
                               ),
                             ),
                           ),
                         ),
-                      if (_isLastPage)
+                      ),
+                      if (!_isLastPage) ...[
+                        Positioned(
+                          bottom: 10.0,
+                          left: 0.0,
+                          right: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            child: DotsIndicator(
+                              controller: _controller,
+                              itemCount: viewModel.ikeshamvugo.length,
+                              onPageSelected: (page) {
+                                _controller.animateToPage(
+                                  page,
+                                  duration: _duration,
+                                  curve: _curve,
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                      ] else ...[
                         Positioned(
                           bottom: 10.0,
                           left: 0.0,
                           right: 0.0,
                           child: Padding(
                             padding: basePadding,
-                            child: ButtonWidget(
-                              title: 'Komeza',
-                              busy: viewModel.isBusy,
-                              onTap: () async {
-                                await viewModel.getIkeshamvugo();
-                                setState(() {
-                                  _isLastPage = false;
-                                  _currentPage = 0;
-                                  _controller.jumpTo(0);
-                                });
-                              },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ButtonWidget(
+                                  title: 'Komeza',
+                                  busy: viewModel.isBusy,
+                                  onTap: () async {
+                                    await viewModel.getIkeshamvugo();
+                                    setState(() {
+                                      _isLastPage = false;
+                                      _currentPage = 0;
+                                      _controller.jumpTo(0);
+                                    });
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                         ),
+                      ],
                     ],
                   ),
                 ),
@@ -172,23 +154,18 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
 class AppCustomCard extends StatelessWidget {
   final String title;
   final String flashCard;
-  final Color firstColor;
-  final Color secondColor;
 
   const AppCustomCard({
     Key? key,
     required this.title,
     required this.flashCard,
-    required this.firstColor,
-    required this.secondColor,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 0,
       margin: basePadding,
-      color: Theme.of(context).backgroundColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),
@@ -204,13 +181,13 @@ class AppCustomCard extends StatelessWidget {
                   topLeft: Radius.circular(borderRadius),
                   topRight: Radius.circular(borderRadius),
                 ),
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               child: Center(
                 child: TextWidget.headline2(
                   title,
                   align: TextAlign.center,
-                  color: Theme.of(context).backgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                 ),
               ),
             ),
@@ -223,7 +200,7 @@ class AppCustomCard extends StatelessWidget {
                 child: TextWidget.headline2(
                   flashCard,
                   align: TextAlign.center,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ),

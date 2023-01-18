@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
+import 'package:ikinyarwanda/shared/ui_helpers.dart';
 
 import 'text_widget.dart';
 
@@ -23,53 +24,46 @@ class InkuruSummaryWidget extends StatelessWidget {
     return Card(
       elevation: 0,
       shape: null,
-      color: Theme.of(context).backgroundColor,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          if (inkuru.author != '' || inkuru.tags.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-              child: Row(
+      margin: const EdgeInsets.symmetric(
+        horizontal: 20.0,
+        vertical: 8.0,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            if (inkuru.author != '' || inkuru.tags.isNotEmpty) ...[
+              Row(
                 children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextWidget.caption(
-                      inkuru.author == ''
-                          ? inkuru.tags.join(', ')
-                          : '${inkuru.author} | ${inkuru.tags.join(', ')}',
-                      color: Theme.of(context).primaryColor,
-                    ),
+                  TextWidget.caption(
+                    inkuru.author == ''
+                        ? inkuru.tags.join(', ')
+                        : '${inkuru.author} | ${inkuru.tags.join(', ')}',
+                    // color: Theme.of(context).primaryColor,
                   ),
                   if (isFavorite) ...[
                     const TextWidget.caption(' | '),
-                    Icon(
-                      Icons.bookmark,
-                      size: 14,
-                      color: Theme.of(context).primaryColor,
-                    ),
+                    const Icon(Icons.bookmark, size: 14),
                   ]
                 ],
               ),
-            ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
-            child: Align(
+              verticalSpaceSmall,
+            ],
+            Align(
               alignment: Alignment.centerLeft,
               child: TextWidget.headline3(
                 inkuru.title,
                 align: TextAlign.start,
               ),
             ),
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            verticalSpaceSmall,
+            Align(
+              alignment: Alignment.centerLeft,
               child: TextWidget.body(summary),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

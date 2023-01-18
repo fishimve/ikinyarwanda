@@ -15,19 +15,6 @@ class IbisakuzoViewModel extends BaseViewModel {
   int? randomId;
   int? level;
 
-  var correctScore = 0;
-  var wrongScore = 0;
-
-  void updateScore(bool isCorrect) {
-    if (isCorrect) {
-      correctScore++;
-      notifyListeners();
-    } else {
-      wrongScore++;
-      notifyListeners();
-    }
-  }
-
   void showAboutDialog() async {
     await _dialogService.showDialog(
       title: 'Sakwe Sakwe',

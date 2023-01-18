@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
-import 'package:ikinyarwanda/shared/themes.dart';
 
 import 'inkuru_summary_widget.dart';
 
@@ -24,7 +23,7 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
 
   @override
   ThemeData appBarTheme(BuildContext context) {
-    final ThemeData theme = ThemeConfig.lightTheme;
+    final ThemeData theme = Theme.of(context);
     return theme.copyWith(
       inputDecorationTheme:
           const InputDecorationTheme(border: InputBorder.none),
@@ -35,11 +34,7 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(
-          Icons.clear,
-          color: Theme.of(context).primaryColor,
-          size: 22.0,
-        ),
+        icon: const Icon(Icons.clear, size: 22.0),
         onPressed: () {
           query = '';
         },
@@ -50,11 +45,7 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(
-        Icons.arrow_back,
-        color: Theme.of(context).primaryColor,
-        size: 22.0,
-      ),
+      icon: const Icon(Icons.arrow_back, size: 22.0),
       onPressed: () {
         close(context, null);
       },

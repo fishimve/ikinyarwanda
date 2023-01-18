@@ -23,17 +23,19 @@ class TaggedIsomeroView extends StatelessWidget {
         final tagTitle = tag == 'AAA' ? 'Ibyo ukunda gusoma' : tag;
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).backgroundColor,
             elevation: 0,
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
                 size: 25,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               onPressed: viewModel.navigateBack,
             ),
-            title: TextWidget.headline3(tagTitle),
+            title: TextWidget.headline3(
+              tagTitle,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             centerTitle: false,
             actions: [
               IconButton(
@@ -51,20 +53,12 @@ class TaggedIsomeroView extends StatelessWidget {
                 icon: Icon(
                   Icons.search,
                   size: 25.0,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ],
           ),
-          body: ListView.separated(
-            separatorBuilder: (_, index) => const Divider(
-              indent: 25,
-              endIndent: 25,
-              thickness: 1,
-              height: 0,
-            ),
-            primary: true,
-            shrinkWrap: true,
+          body: ListView.builder(
             itemCount: viewModel.inkurus.length,
             itemBuilder: (_, index) => GestureDetector(
               onTap: () => viewModel.navigateToInkuruView(

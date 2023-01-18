@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/interface/widgets/circular_progress_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
-import 'package:ikinyarwanda/shared/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 
 import 'incamarenga_view_model.dart';
@@ -16,6 +15,18 @@ class IncamarengaView extends StatelessWidget {
       viewModelBuilder: () => IncamarengaViewModel(),
       onViewModelReady: (viewModel) => viewModel.getIkeshamvugo(),
       builder: (context, viewModel, child) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: TextButton(
+            style: TextButton.styleFrom(
+              minimumSize: Size.zero,
+              padding: EdgeInsets.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            onPressed: viewModel.showAboutDialog,
+            child: const TextWidget.headline1('Incamarenga'),
+          ),
+        ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()
             : WebCenteredWidget(
@@ -23,30 +34,11 @@ class IncamarengaView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: basePadding,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: Size.zero,
-                            padding: EdgeInsets.zero,
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                          onPressed: viewModel.showAboutDialog,
-                          child: TextWidget.headline1(
-                            'Incamarenga',
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                      ),
                       Expanded(
                         child: ListView.builder(
                           itemCount: viewModel.incamarenga.length,
                           padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                           itemBuilder: (context, index) => ExpansionTile(
-                            collapsedBackgroundColor:
-                                Theme.of(context).backgroundColor,
-                            iconColor: Theme.of(context).primaryColor,
-                            backgroundColor: Theme.of(context).backgroundColor,
                             tilePadding: const EdgeInsets.symmetric(
                               horizontal: 8.0,
                             ),

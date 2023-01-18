@@ -18,17 +18,19 @@ class InkuruView extends StatelessWidget {
       builder: (context, viewModel, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Theme.of(context).backgroundColor,
             elevation: 0,
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
                 size: 25,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               onPressed: viewModel.navigatorPop,
             ),
-            title: TextWidget.headline3(inkuru.title),
+            title: TextWidget.headline3(
+              inkuru.title,
+              color: Theme.of(context).colorScheme.primary,
+            ),
             actions: [
               IconButton(
                 onPressed: () => viewModel.handleFavorite(inkuru),
@@ -37,7 +39,7 @@ class InkuruView extends StatelessWidget {
                       ? Icons.bookmark_added
                       : Icons.bookmark_add_outlined,
                   size: 25,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               )
             ],

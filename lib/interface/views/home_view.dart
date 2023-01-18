@@ -19,9 +19,7 @@ class HomeView extends StatelessWidget {
       viewModelBuilder: () => HomeViewModel(),
       builder: (context, viewModel, child) => Scaffold(
         body: WebCenteredWidget(
-          child: SafeArea(
-            child: getViewForIndex(viewModel.currentIndex),
-          ),
+          child: getViewForIndex(viewModel.currentIndex),
         ),
         bottomNavigationBar: PageTransitionSwitcher(
           duration: const Duration(milliseconds: 300),
@@ -40,9 +38,6 @@ class HomeView extends StatelessWidget {
           },
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Theme.of(context).primaryColor,
-            selectedItemColor: Theme.of(context).colorScheme.secondary,
-            unselectedItemColor: Theme.of(context).indicatorColor,
             currentIndex: viewModel.currentIndex,
             onTap: viewModel.setIndex,
             items: const [

@@ -43,6 +43,18 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
       viewModelBuilder: () => IbisakuzoViewModel(),
       onViewModelReady: (viewModel) => viewModel.getIbisakuzo(),
       builder: (context, viewModel, child) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: TextButton(
+            style: TextButton.styleFrom(
+              minimumSize: Size.zero,
+              padding: EdgeInsets.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            onPressed: viewModel.showAboutDialog,
+            child: const TextWidget.headline1('Sakwe Sakwe?'),
+          ),
+        ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()
             : WebCenteredWidget(
@@ -64,103 +76,65 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
                           });
                         },
                         itemBuilder: (context, index) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: basePadding,
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  minimumSize: Size.zero,
-                                  padding: EdgeInsets.zero,
-                                  tapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                ),
-                                onPressed: viewModel.showAboutDialog,
-                                child: TextWidget.headline1(
-                                  'Sakwe Sakwe?',
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                            ),
-                            verticalSpaceLarge,
-                            Flexible(
-                              child: IgisakuzoWidget(
-                                igisakuzo: viewModel.ibisakuzoIcumi[index],
-                                updateScore: viewModel.updateScore,
-                              ),
-                            ),
-                            verticalSpaceSmall,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                TextWidget.caption(
-                                  viewModel.correctScore.toString(),
-                                ),
-                                horizontalSpaceTiny,
-                                const Icon(
-                                  Icons.check,
-                                  size: 18,
-                                ),
-                                horizontalSpaceSmall,
-                                TextWidget.caption(
-                                  viewModel.wrongScore.toString(),
-                                ),
-                                horizontalSpaceTiny,
-                                const Icon(
-                                  Icons.close,
-                                  size: 18,
-                                ),
-                              ],
+                            IgisakuzoWidget(
+                              igisakuzo: viewModel.ibisakuzoIcumi[index],
                             ),
                           ],
                         ),
                       ),
-                      if (!_isLastPage)
+                      if (!_isLastPage) ...[
                         Positioned(
-                          bottom: 0.0,
+                          bottom: 10.0,
                           left: 0.0,
                           right: 0.0,
                           child: Padding(
-                            padding: const EdgeInsets.all(
-                              10,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
                             ),
-                            child: Center(
-                              child: DotsIndicator(
-                                controller: _controller,
-                                itemCount: viewModel.ibisakuzoIcumi.length,
-                                color: Theme.of(context).primaryColor,
-                                onPageSelected: (int page) {
-                                  _controller.animateToPage(
-                                    page,
-                                    duration: _duration,
-                                    curve: _curve,
-                                  );
-                                },
-                              ),
+                            child: DotsIndicator(
+                              controller: _controller,
+                              itemCount: viewModel.ibisakuzoIcumi.length,
+                              onPageSelected: (page) {
+                                _controller.animateToPage(
+                                  page,
+                                  duration: _duration,
+                                  curve: _curve,
+                                );
+                              },
                             ),
                           ),
                         ),
-                      if (_isLastPage)
+                      ] else ...[
                         Positioned(
                           bottom: 10.0,
                           left: 0.0,
                           right: 0.0,
                           child: Padding(
                             padding: basePadding,
-                            child: ButtonWidget(
-                              title: 'Ibindi bisakuzo',
-                              busy: viewModel.isBusy,
-                              onTap: () async {
-                                await viewModel.getIbisakuzo();
-                                setState(() {
-                                  _isLastPage = false;
-                                  _currentPage = 0;
-                                  _controller.jumpTo(0);
-                                });
-                              },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ButtonWidget(
+                                  title: 'Ibindi bisakuzo',
+                                  busy: viewModel.isBusy,
+                                  onTap: () async {
+                                    await viewModel.getIbisakuzo();
+                                    setState(() {
+                                      _isLastPage = false;
+                                      _currentPage = 0;
+                                      _controller.jumpTo(0);
+                                    });
+                                  },
+                                ),
+                              ],
                             ),
                           ),
                         ),
+                      ],
                     ],
                   ),
                 ),
@@ -172,20 +146,14 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
 
 class IgisakuzoWidget extends StatelessWidget {
   final Igisakuzo igisakuzo;
-  final Function(bool) updateScore;
 
-  const IgisakuzoWidget({
-    Key? key,
-    required this.igisakuzo,
-    required this.updateScore,
-  }) : super(key: key);
+  const IgisakuzoWidget({Key? key, required this.igisakuzo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 2,
+      elevation: 0,
       margin: basePadding,
-      color: Theme.of(context).backgroundColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),
@@ -194,48 +162,46 @@ class IgisakuzoWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Flexible(
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 25.0,
-                vertical: 25.0,
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(borderRadius),
-                  topRight: Radius.circular(borderRadius),
-                ),
-              ),
-              child: TextWidget.headline2(
-                igisakuzo.question,
-                align: TextAlign.center,
-                color: Theme.of(context).backgroundColor,
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 25.0,
+              vertical: 25.0,
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(borderRadius),
+                topRight: Radius.circular(borderRadius),
               ),
             ),
+            child: TextWidget.headline2(
+              igisakuzo.question,
+              align: TextAlign.center,
+              color: Theme.of(context).colorScheme.background,
+            ),
           ),
-          verticalSpaceSmall,
+          verticalSpaceRegular,
           OptionWidget(
             optionText: igisakuzo.option1,
             correctAnswer: igisakuzo.correctAnswer,
-            updateScore: updateScore,
           ),
+          verticalSpaceTiny,
           OptionWidget(
             optionText: igisakuzo.option2,
             correctAnswer: igisakuzo.correctAnswer,
-            updateScore: updateScore,
           ),
+          verticalSpaceTiny,
           OptionWidget(
             optionText: igisakuzo.option3,
             correctAnswer: igisakuzo.correctAnswer,
-            updateScore: updateScore,
           ),
+          verticalSpaceTiny,
           OptionWidget(
             optionText: igisakuzo.option4,
             correctAnswer: igisakuzo.correctAnswer,
-            updateScore: updateScore,
           ),
+          verticalSpaceRegular,
         ],
       ),
     );
@@ -245,12 +211,10 @@ class IgisakuzoWidget extends StatelessWidget {
 class OptionWidget extends StatefulWidget {
   final String optionText;
   final String correctAnswer;
-  final Function(bool) updateScore;
   const OptionWidget({
     Key? key,
     required this.optionText,
     required this.correctAnswer,
-    required this.updateScore,
   }) : super(key: key);
 
   @override
@@ -282,12 +246,11 @@ class _GameOptionState extends State<OptionWidget> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         color: _isCorrect
-            ? Theme.of(context).primaryColor
-            : Theme.of(context).backgroundColor,
+            ? Theme.of(context).colorScheme.secondary
+            : Theme.of(context).colorScheme.background,
       ),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          foregroundColor: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
           ),
@@ -296,12 +259,10 @@ class _GameOptionState extends State<OptionWidget> {
           setState(() {
             if (widget.optionText == widget.correctAnswer) {
               if (!_isCorrect && !_isWrong) {
-                widget.updateScore(true);
                 _isCorrect = true;
               }
             } else {
               if (!_isCorrect && !_isWrong) {
-                widget.updateScore(false);
                 _isWrong = true;
               }
             }
@@ -316,23 +277,23 @@ class _GameOptionState extends State<OptionWidget> {
                 child: TextWidget.body(
                   widget.optionText,
                   color: _isCorrect
-                      ? Theme.of(context).backgroundColor
+                      ? Theme.of(context).colorScheme.background
                       : _isWrong
-                          ? Theme.of(context).errorColor
-                          : Theme.of(context).primaryColor,
+                          ? Theme.of(context).colorScheme.error
+                          : null,
                 ),
               ),
               horizontalSpaceTiny,
               _isCorrect
                   ? Icon(
                       Icons.check,
-                      color: Theme.of(context).backgroundColor,
+                      color: Theme.of(context).colorScheme.onPrimary,
                       size: 16,
                     )
                   : _isWrong
                       ? Icon(
                           Icons.close,
-                          color: Theme.of(context).errorColor,
+                          color: Theme.of(context).colorScheme.error,
                           size: 16,
                         )
                       : const SizedBox.shrink(),

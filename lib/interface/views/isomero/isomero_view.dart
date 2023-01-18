@@ -17,40 +17,24 @@ class IsomeroView extends StatelessWidget {
       viewModelBuilder: () => IsomeroViewModel(),
       onViewModelReady: ((viewModel) => viewModel.getInkurus()),
       builder: (context, viewModel, child) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          title: TextButton(
+            style: TextButton.styleFrom(
+              minimumSize: Size.zero,
+              padding: EdgeInsets.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            onPressed: viewModel.showAboutDialog,
+            child: const TextWidget.headline1('Isomero'),
+          ),
+        ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()
             : WebCenteredWidget(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              minimumSize: Size.zero,
-                              padding: EdgeInsets.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            ),
-                            onPressed: viewModel.showAboutDialog,
-                            child: TextWidget.headline1(
-                              'Isomero',
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                          // IconButton(
-                          //   onPressed: () {},
-                          //   icon: Icon(
-                          //     Icons.info_outline,
-                          //     size: 14.0,
-                          //     color: Theme.of(context).primaryColor,
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                    ),
                     Container(
                       height: 50,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -117,15 +101,7 @@ class IsomeroView extends StatelessWidget {
                     ),
                     const Divider(thickness: 1, height: 0),
                     Expanded(
-                      child: ListView.separated(
-                        separatorBuilder: (_, index) => const Divider(
-                          indent: 25,
-                          endIndent: 25,
-                          thickness: 1,
-                          height: 0,
-                        ),
-                        primary: true,
-                        shrinkWrap: true,
+                      child: ListView.builder(
                         itemCount: viewModel.inkurus.length,
                         itemBuilder: (_, index) => GestureDetector(
                           onTap: () => viewModel.navigateToInkuruView(
