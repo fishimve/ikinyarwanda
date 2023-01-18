@@ -19,6 +19,7 @@ class IsomeroViewModel extends ReactiveViewModel {
   List<Inkuru> get inkurus => _inkurus;
 
   List<String> get ubwoko => [
+        'AAA',
         'Abana',
         'Ibyivugo',
         'Imigani',

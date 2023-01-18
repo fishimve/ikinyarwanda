@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/shared/colors.dart';
+import 'package:ikinyarwanda/shared/styles.dart';
 
 class ThemeConfig {
   static ThemeData lightTheme = ThemeData(
@@ -8,6 +9,15 @@ class ThemeConfig {
     scaffoldBackgroundColor: AppColors.backgroundLight,
     backgroundColor: AppColors.backgroundLight,
     indicatorColor: AppColors.inputLight,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.backgroundLight,
+      elevation: 0,
+      titleTextStyle: bodyStyle,
+      actionsIconTheme: IconThemeData(
+        color: AppColors.bodyTextLight,
+        size: 22,
+      ),
+    ),
     colorScheme: ColorScheme.fromSwatch().copyWith(
       secondary: AppColors.secondaryLight,
     ),
@@ -22,6 +32,15 @@ class ThemeConfig {
     scaffoldBackgroundColor: AppColors.backgroundDark,
     backgroundColor: AppColors.backgroundDark,
     indicatorColor: AppColors.inputDark,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.backgroundDark,
+      elevation: 0,
+      titleTextStyle: bodyStyle,
+      actionsIconTheme: IconThemeData(
+        color: AppColors.bodyTextDark,
+        size: 22,
+      ),
+    ),
     colorScheme: ColorScheme.fromSwatch().copyWith(
       secondary: AppColors.secondaryDark,
     ),
