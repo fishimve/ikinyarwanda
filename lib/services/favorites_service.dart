@@ -37,7 +37,7 @@ class FavoritesService with ListenableServiceMixin {
     return _favoritesIds.contains(id);
   }
 
-  void favoriteStory(String id) async {
+  void favoriteInkuru(String id) async {
     _favoritesIds.add(id);
     final inkuru = await _dataService.getInkuruById(id);
     if (inkuru != null) {
@@ -46,7 +46,7 @@ class FavoritesService with ListenableServiceMixin {
     await _storageService.saveStringListToDisk('favorites', _favoritesIds);
   }
 
-  void unfavoriteStory(String id) async {
+  void unfavoriteInkuru(String id) async {
     _favoritesIds.remove(id);
     _reactiveList.removeWhere((story) => story.title == id);
     await _storageService.saveStringListToDisk('favorites', _favoritesIds);

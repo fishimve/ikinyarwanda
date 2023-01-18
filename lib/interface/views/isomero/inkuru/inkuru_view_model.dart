@@ -1,4 +1,5 @@
 import 'package:ikinyarwanda/locator.dart';
+import 'package:ikinyarwanda/models/inkuru.dart';
 import 'package:ikinyarwanda/services/dialog_service.dart';
 import 'package:ikinyarwanda/services/favorites_service.dart';
 import 'package:ikinyarwanda/services/navigation_service.dart';
@@ -15,28 +16,23 @@ class InkuruViewModel extends ReactiveViewModel {
     isFavorite = _favoritesService.isFavorite(id);
   }
 
-  void handleFavorite(
-    String inkuruId,
-    String dialogConfirm,
-    String removeFromFavs,
-    String confirm,
-    String deny,
-  ) async {
+  void handleFavorite(Inkuru inkuru) async {
     if (isFavorite) {
       var dialogResponse = await _dialogService.showConfirmationDialog(
-        title: dialogConfirm,
-        description: removeFromFavs,
-        confirmation: confirm,
-        cancel: deny,
+        title: 'Gusiba mu byo ukunda',
+        description:
+            'Uremeza ko ushaka kuvana "${inkuru.title}" mubyo ukunda gusoma?',
+        confirmation: 'Yego',
+        cancel: 'Oya',
       )!;
 
       if (dialogResponse.confirmed!) {
-        // _favoritesService.unfavoriteInkuru(InkuruId);
+        _favoritesService.unfavoriteInkuru(inkuru.id);
         isFavorite = false;
         notifyListeners();
       }
     } else {
-      // _favoritesService.favoriteInkuru(InkuruId);
+      _favoritesService.favoriteInkuru(inkuru.id);
       isFavorite = true;
       notifyListeners();
     }

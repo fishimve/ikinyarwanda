@@ -98,8 +98,13 @@ class IsomeroView extends StatelessWidget {
                         primary: true,
                         shrinkWrap: true,
                         itemCount: viewModel.inkurus.length,
-                        itemBuilder: (_, index) => InkuruSummaryWidget(
-                          inkuru: viewModel.inkurus[index],
+                        itemBuilder: (_, index) => GestureDetector(
+                          onTap: () => viewModel.navigateToInkuruView(
+                            viewModel.inkurus[index],
+                          ),
+                          child: InkuruSummaryWidget(
+                            inkuru: viewModel.inkurus[index],
+                          ),
                         ),
                       ),
                     )

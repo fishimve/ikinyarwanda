@@ -7,8 +7,6 @@ import 'package:stacked/stacked.dart';
 
 import 'Inkuru_view_model.dart';
 
-
-
 class InkuruView extends StatelessWidget {
   final Inkuru inkuru;
   const InkuruView({Key? key, required this.inkuru}) : super(key: key);
@@ -33,7 +31,7 @@ class InkuruView extends StatelessWidget {
             title: TextWidget.headline3(inkuru.title),
             actions: [
               IconButton(
-                onPressed:null,
+                onPressed: () => viewModel.handleFavorite(inkuru),
                 icon: Icon(
                   viewModel.isFavorite
                       ? Icons.bookmark_added
