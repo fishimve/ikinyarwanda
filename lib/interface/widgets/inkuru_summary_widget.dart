@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
-import 'package:ikinyarwanda/shared/ui_helpers.dart';
 
 import 'text_widget.dart';
 
