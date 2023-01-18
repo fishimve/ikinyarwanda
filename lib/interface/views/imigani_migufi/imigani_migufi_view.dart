@@ -42,8 +42,7 @@ class ImiganiMigufiView extends StatelessWidget {
                       ),
                       Expanded(
                         child: ListView.separated(
-                          separatorBuilder: (_, index) => Divider(
-                            color: Theme.of(context).primaryColor,
+                          separatorBuilder: (_, index) => const Divider(
                             indent: 25,
                             endIndent: 25,
                           ),

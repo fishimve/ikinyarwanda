@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/interface/widgets/circular_progress_widget.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
+import 'package:ikinyarwanda/shared/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
@@ -20,7 +21,23 @@ class IsomeroView extends StatelessWidget {
             ? const CircularProgressWidget()
             : WebCenteredWidget(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Padding(
+                      padding: basePadding,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          minimumSize: Size.zero,
+                          padding: EdgeInsets.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        onPressed: viewModel.showAboutDialog,
+                        child: TextWidget.headline1(
+                          'Isomero',
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ),
                     Container(
                       height: 50,
                       padding: const EdgeInsets.only(left: 20),
@@ -45,9 +62,11 @@ class IsomeroView extends StatelessWidget {
                                             const EdgeInsets.only(right: 15.0),
                                         child: ConstrainedBox(
                                           constraints: const BoxConstraints(
-                                              minWidth: 30),
+                                            minWidth: 30,
+                                          ),
                                           child: TextWidget.body(
-                                              viewModel.ubwoko[index]),
+                                            viewModel.ubwoko[index],
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -69,11 +88,19 @@ class IsomeroView extends StatelessWidget {
                     ),
                     const Divider(thickness: 1, height: 0),
                     Expanded(
-                      child: ListView.builder(
+                      child: ListView.separated(
+                        separatorBuilder: (_, index) => const Divider(
+                          indent: 25,
+                          endIndent: 25,
+                          thickness: 1,
+                          height: 0,
+                        ),
+                        primary: true,
+                        shrinkWrap: true,
+                        itemCount: viewModel.inkurus.length,
                         itemBuilder: (_, index) => InkuruSummaryWidget(
                           inkuru: viewModel.inkurus[index],
                         ),
-                        itemCount: viewModel.inkurus.length,
                       ),
                     )
                   ],
@@ -106,11 +133,31 @@ class InkuruSummaryWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          if (inkuru.author != '' || inkuru.tags.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+              child: Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextWidget.caption(
+                      inkuru.author == ''
+                          ? inkuru.tags.join(', ')
+                          : '${inkuru.author} | ${inkuru.tags.join(', ')}',
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: TextWidget.headline3(inkuru.title),
+              child: TextWidget.headline3(
+                inkuru.title,
+                align: TextAlign.center,
+              ),
             ),
           ),
           Align(
@@ -118,21 +165,6 @@ class InkuruSummaryWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               child: TextWidget.body(summary),
-            ),
-          ),
-          if (inkuru.author != '')
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: TextWidget.caption(inkuru.author),
-              ),
-            ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: TextWidget.caption(inkuru.tags.join(', ')),
             ),
           ),
         ],

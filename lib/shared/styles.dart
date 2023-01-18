@@ -14,18 +14,18 @@ const TextStyle headline2Style = TextStyle(
 
 const TextStyle headline3Style = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 16,
-  fontWeight: FontWeight.w500,
+  fontSize: 18,
+  fontWeight: FontWeight.w600,
 );
 
 const TextStyle bodyStyle = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 14,
+  fontSize: 15,
   fontWeight: FontWeight.w400,
 );
 
 const TextStyle captionStyle = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 12,
+  fontSize: 11,
   fontWeight: FontWeight.w300,
 );

@@ -2,6 +2,7 @@ import 'package:ikinyarwanda/interface/route_names.dart';
 import 'package:ikinyarwanda/locator.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
 import 'package:ikinyarwanda/services/data_service.dart';
+import 'package:ikinyarwanda/services/dialog_service.dart';
 import 'package:ikinyarwanda/services/favorites_service.dart';
 import 'package:ikinyarwanda/services/navigation_service.dart';
 import 'package:stacked/stacked.dart';
@@ -9,6 +10,7 @@ import 'package:stacked/stacked.dart';
 class IsomeroViewModel extends ReactiveViewModel {
   final _favoritesService = locator<FavoritesService>();
   final _navigationService = locator<NavigationService>();
+  final _dialogService = locator<DialogService>();
   final _dataService = locator<DataService>();
 
   List<Inkuru> get favoriteStories => _favoritesService.favoritedInkurus;
@@ -59,6 +61,14 @@ class IsomeroViewModel extends ReactiveViewModel {
     setBusy(true);
     await _navigationService.navigateTo(inkuruViewRoute, arguments: inkuru);
     setBusy(false);
+  }
+
+  void showAboutDialog() async {
+    await _dialogService.showDialog(
+      title: 'Ubuvanganzo',
+      description:
+          'Ubuvanganzo nyarwanda harimo ibisigo, amazina y\'inka, ibyivugo, ibisingizo ibihozo, imigani miremire, ibitekerezo, imigani migufi (imigenurano),inshoberamahanga, insigamigani, n\'ibindi',
+    );
   }
 
   @override
