@@ -3,7 +3,7 @@ description: Kinyarwanda language stories and games.
 
 publish_to: "none"
 
-version: 1.0.0+1
+version: 2.0.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -28,25 +28,25 @@ dev_dependencies:
     sdk: flutter
 
 # flutter_native_splash:
-#   color: "#153D68"
+#   color: "#FFFFFF"
 #   android: true
 #   ios: true
 #   web: true
 #   android_12:
-#     color: "#153D68"
+#     color: "#FFFFFF"
 # flutter_icons:
 #   image_path: "assets/icons/ikinyarwanda_logo.png"
-#   android: true
+#   android: false
 #   ios: true
 #   min_sdk_android: 21
-#   adaptive_icon_background: "153D68"
+#   adaptive_icon_background: "FFFFFF"
 #   adaptive_icon_foreground: "assets/icons/ikinyarwanda_logo.png"
 #   remove_alpha_ios: true
 #   web:
 #     generate: true
 #     image_path: "assets/icons/ikinyarwanda_logo.png"
-#     background_color: "#153D68"
-#     theme_color: "#153D68"
+#     background_color: "#FFFFFF"
+#     theme_color: "#FFFFFF"
 #   windows:
 #     generate: true
 #     image_path: "assets/icons/ikinyarwanda_logo.png"
@@ -54,6 +54,7 @@ dev_dependencies:
 #   macos:
 #     generate: true
 #     image_path: "assets/icons/ikinyarwanda_logo.png"
+
 flutter:
   uses-material-design: true
 

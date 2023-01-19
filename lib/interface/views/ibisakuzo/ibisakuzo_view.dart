@@ -46,6 +46,7 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           title: TextButton(
             style: TextButton.styleFrom(
               minimumSize: Size.zero,

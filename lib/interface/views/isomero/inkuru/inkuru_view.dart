@@ -20,6 +20,7 @@ class InkuruView extends StatelessWidget {
           appBar: AppBar(
             elevation: 0,
             centerTitle: true,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,

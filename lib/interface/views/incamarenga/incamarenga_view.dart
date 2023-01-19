@@ -17,6 +17,7 @@ class IncamarengaView extends StatelessWidget {
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           elevation: 0,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           centerTitle: true,
           title: TextButton(
             style: TextButton.styleFrom(
