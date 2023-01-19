@@ -18,6 +18,7 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
       builder: (context, viewModel, child) => Scaffold(
+        primary: false,
         body: WebCenteredWidget(
           child: getViewForIndex(viewModel.currentIndex),
         ),
@@ -40,6 +41,10 @@ class HomeView extends StatelessWidget {
             type: BottomNavigationBarType.fixed,
             currentIndex: viewModel.currentIndex,
             onTap: viewModel.setIndex,
+            elevation: 0,
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            selectedItemColor: Theme.of(context).colorScheme.primary,
+            unselectedItemColor: Theme.of(context).colorScheme.onSurface,
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.library_books_outlined),

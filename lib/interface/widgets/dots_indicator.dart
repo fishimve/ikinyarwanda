@@ -30,7 +30,7 @@ class DotsIndicator extends AnimatedWidget {
         width: _kDotSpacing,
         child: Center(
           child: Material(
-            color: Theme.of(context).colorScheme.primary,
+            color: Theme.of(context).colorScheme.onBackground,
             type: MaterialType.circle,
             child: SizedBox(
               width: _kDotSize * zoom,

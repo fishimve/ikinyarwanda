@@ -45,6 +45,7 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           elevation: 0,
+          centerTitle: true,
           title: TextButton(
             style: TextButton.styleFrom(
               minimumSize: Size.zero,
@@ -52,7 +53,10 @@ class _IkeshamvugoViewState extends State<IkeshamvugoView>
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: viewModel.showAboutDialog,
-            child: const TextWidget.headline1('Ikeshamvugo'),
+            child: TextWidget.headline1(
+              'Ikeshamvugo',
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
         ),
         body: viewModel.isBusy
@@ -166,6 +170,7 @@ class AppCustomCard extends StatelessWidget {
     return Card(
       elevation: 0,
       margin: basePadding,
+      color: Theme.of(context).colorScheme.surfaceVariant,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),
@@ -181,7 +186,7 @@ class AppCustomCard extends StatelessWidget {
                   topLeft: Radius.circular(borderRadius),
                   topRight: Radius.circular(borderRadius),
                 ),
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
               child: Center(
                 child: TextWidget.headline2(
@@ -200,7 +205,7 @@ class AppCustomCard extends StatelessWidget {
                 child: TextWidget.headline2(
                   flashCard,
                   align: TextAlign.center,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
               ),
             ),

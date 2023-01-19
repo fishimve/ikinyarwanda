@@ -51,20 +51,26 @@ class ButtonWidget extends StatelessWidget {
         decoration: !outline
             ? BoxDecoration(
                 color: !disabled
-                    ? color ?? Theme.of(context).colorScheme.primary
+                    ? color ?? Theme.of(context).colorScheme.secondary
                     : color == null
-                        ? Theme.of(context).colorScheme.primary.withOpacity(.3)
+                        ? Theme.of(context)
+                            .colorScheme
+                            .secondary
+                            .withOpacity(.3)
                         : color!.withOpacity(.3),
                 borderRadius: BorderRadius.circular(borderRadius),
               )
             : BoxDecoration(
-                color: Theme.of(context).backgroundColor,
+                color: Theme.of(context).colorScheme.background,
                 borderRadius: BorderRadius.circular(borderRadius),
                 border: Border.all(
                   color: !disabled
-                      ? borderColor ?? Theme.of(context).colorScheme.primary
+                      ? borderColor ?? Theme.of(context).colorScheme.secondary
                       : borderColor == null
-                          ? Theme.of(context).primaryColor.withOpacity(.3)
+                          ? Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(.3)
                           : borderColor!.withOpacity(.3),
                   width: 1,
                 ),
@@ -81,12 +87,12 @@ class ButtonWidget extends StatelessWidget {
                       title,
                       fontWeight: !outline ? 2 : 1,
                       color: !outline
-                          ? Theme.of(context).colorScheme.background
+                          ? Theme.of(context).colorScheme.onSecondary
                           : !disabled
-                              ? Theme.of(context).colorScheme.primary
+                              ? Theme.of(context).colorScheme.onSecondary
                               : Theme.of(context)
                                   .colorScheme
-                                  .primary
+                                  .onBackground
                                   .withOpacity(.3),
                     ),
                   ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
+import 'package:ikinyarwanda/shared/styles.dart';
 
 import 'inkuru_summary_widget.dart';
 
@@ -8,12 +9,14 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
   final List<Inkuru> inkurus;
   final List<String> favorites;
   final Function(Inkuru) readInkuru;
+  final BuildContext context;
 
   SearchWidget({
     required this.readInkuru,
     required this.inkurus,
     required this.favorites,
     required this.searchLabel,
+    required this.context,
   });
 
   var tempStories = <Inkuru>[];
@@ -22,11 +25,25 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
   String get searchFieldLabel => searchLabel;
 
   @override
+  TextStyle? get searchFieldStyle => headline3Style.apply(
+        color: Theme.of(context).colorScheme.onPrimary,
+        decoration: TextDecoration.none,
+      );
+
+  @override
   ThemeData appBarTheme(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    final theme = Theme.of(context);
     return theme.copyWith(
-      inputDecorationTheme:
-          const InputDecorationTheme(border: InputBorder.none),
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none,
+        hintStyle: headline3Style.apply(
+            color: Theme.of(context).colorScheme.onPrimary),
+        labelStyle: headline3Style.apply(
+            color: Theme.of(context).colorScheme.onPrimary),
+      ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: Theme.of(context).colorScheme.onPrimary,
+      ),
     );
   }
 
@@ -34,7 +51,11 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: const Icon(Icons.clear, size: 22.0),
+        icon: Icon(
+          Icons.clear,
+          size: 22.0,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
         onPressed: () {
           query = '';
         },
@@ -45,7 +66,11 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: const Icon(Icons.arrow_back, size: 22.0),
+      icon: Icon(
+        Icons.arrow_back,
+        size: 22.0,
+        color: Theme.of(context).colorScheme.onPrimary,
+      ),
       onPressed: () {
         close(context, null);
       },
@@ -54,9 +79,6 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    tempStories = inkurus
-        .where((a) => a.title.toLowerCase().contains(query.toLowerCase()))
-        .toList();
     return ListView.builder(
       itemCount: tempStories.length,
       itemBuilder: (context, index) {

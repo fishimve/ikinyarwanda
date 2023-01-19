@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const TextStyle headline1Style = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 22,
+  fontSize: 20,
   fontWeight: FontWeight.w700,
 );
 
@@ -20,12 +20,12 @@ const TextStyle headline3Style = TextStyle(
 
 const TextStyle bodyStyle = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 15,
+  fontSize: 16,
   fontWeight: FontWeight.w400,
 );
 
 const TextStyle captionStyle = TextStyle(
   fontFamily: 'OpenSans',
-  fontSize: 11,
+  fontSize: 12,
   fontWeight: FontWeight.w300,
 );

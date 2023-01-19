@@ -45,6 +45,7 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           elevation: 0,
+          centerTitle: true,
           title: TextButton(
             style: TextButton.styleFrom(
               minimumSize: Size.zero,
@@ -52,7 +53,10 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: viewModel.showAboutDialog,
-            child: const TextWidget.headline1('Sakwe Sakwe?'),
+            child: TextWidget.headline1(
+              'Sakwe Sakwe?',
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
         ),
         body: viewModel.isBusy
@@ -75,14 +79,10 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
                                 viewModel.ibisakuzoIcumi.length - 1;
                           });
                         },
-                        itemBuilder: (context, index) => Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IgisakuzoWidget(
-                              igisakuzo: viewModel.ibisakuzoIcumi[index],
-                            ),
-                          ],
+                        itemBuilder: (context, index) => Center(
+                          child: IgisakuzoWidget(
+                            igisakuzo: viewModel.ibisakuzoIcumi[index],
+                          ),
                         ),
                       ),
                       if (!_isLastPage) ...[
@@ -153,6 +153,7 @@ class IgisakuzoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
+      color: Theme.of(context).colorScheme.surfaceVariant,
       margin: basePadding,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
@@ -169,7 +170,7 @@ class IgisakuzoWidget extends StatelessWidget {
               vertical: 25.0,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(borderRadius),
                 topRight: Radius.circular(borderRadius),
@@ -246,8 +247,10 @@ class _GameOptionState extends State<OptionWidget> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius),
         color: _isCorrect
-            ? Theme.of(context).colorScheme.secondary
-            : Theme.of(context).colorScheme.background,
+            ? Theme.of(context).colorScheme.inverseSurface
+            : _isWrong
+                ? Theme.of(context).colorScheme.errorContainer
+                : Theme.of(context).colorScheme.surface,
       ),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
@@ -277,23 +280,23 @@ class _GameOptionState extends State<OptionWidget> {
                 child: TextWidget.body(
                   widget.optionText,
                   color: _isCorrect
-                      ? Theme.of(context).colorScheme.background
+                      ? Theme.of(context).colorScheme.onInverseSurface
                       : _isWrong
-                          ? Theme.of(context).colorScheme.error
-                          : null,
+                          ? Theme.of(context).colorScheme.onErrorContainer
+                          : Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               horizontalSpaceTiny,
               _isCorrect
                   ? Icon(
                       Icons.check,
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.onInverseSurface,
                       size: 16,
                     )
                   : _isWrong
                       ? Icon(
                           Icons.close,
-                          color: Theme.of(context).colorScheme.error,
+                          color: Theme.of(context).colorScheme.onErrorContainer,
                           size: 16,
                         )
                       : const SizedBox.shrink(),

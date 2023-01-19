@@ -19,6 +19,7 @@ class IsomeroView extends StatelessWidget {
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           elevation: 0,
+          centerTitle: true,
           title: TextButton(
             style: TextButton.styleFrom(
               minimumSize: Size.zero,
@@ -26,7 +27,10 @@ class IsomeroView extends StatelessWidget {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: viewModel.showAboutDialog,
-            child: const TextWidget.headline1('Isomero'),
+            child: TextWidget.headline1(
+              'Isomero',
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
         ),
         body: viewModel.isBusy
@@ -38,7 +42,7 @@ class IsomeroView extends StatelessWidget {
                     Container(
                       height: 50,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      alignment: Alignment.center,
+                      color: Theme.of(context).colorScheme.surface,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -53,22 +57,28 @@ class IsomeroView extends StatelessWidget {
                                 itemBuilder: (_, index) => GestureDetector(
                                   onTap: () =>
                                       viewModel.navigateToTaggedIsomeroView(
-                                          viewModel.ubwoko[index]),
+                                    viewModel.ubwoko[index],
+                                  ),
                                   child: Center(
                                     child: Padding(
                                       padding:
                                           const EdgeInsets.only(right: 15.0),
                                       child: ConstrainedBox(
-                                        constraints: const BoxConstraints(
-                                          minWidth: 30,
-                                        ),
+                                        constraints:
+                                            const BoxConstraints(minWidth: 30),
                                         child: index == 0
-                                            ? const Icon(
+                                            ? Icon(
                                                 Icons.bookmark_border,
                                                 size: 22.0,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface,
                                               )
                                             : TextWidget.body(
                                                 viewModel.ubwoko[index],
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface,
                                               ),
                                       ),
                                     ),
@@ -88,18 +98,19 @@ class IsomeroView extends StatelessWidget {
                                   readInkuru: viewModel.navigateToInkuruView,
                                   favorites: viewModel.favorites,
                                   searchLabel: 'Shakisha',
+                                  context: context,
                                 ),
                               );
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.search,
                               size: 22.0,
+                              color: Theme.of(context).colorScheme.onSurface,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const Divider(thickness: 1, height: 0),
                     Expanded(
                       child: ListView.builder(
                         itemCount: viewModel.inkurus.length,

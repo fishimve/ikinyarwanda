@@ -24,6 +24,7 @@ class InkuruSummaryWidget extends StatelessWidget {
     return Card(
       elevation: 0,
       shape: null,
+      color: Theme.of(context).colorScheme.surfaceVariant,
       margin: const EdgeInsets.symmetric(
         horizontal: 20.0,
         vertical: 8.0,
@@ -40,11 +41,18 @@ class InkuruSummaryWidget extends StatelessWidget {
                     inkuru.author == ''
                         ? inkuru.tags.join(', ')
                         : '${inkuru.author} | ${inkuru.tags.join(', ')}',
-                    // color: Theme.of(context).primaryColor,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   if (isFavorite) ...[
-                    const TextWidget.caption(' | '),
-                    const Icon(Icons.bookmark, size: 14),
+                    TextWidget.caption(
+                      ' | ',
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    Icon(
+                      Icons.bookmark,
+                      size: 14,
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ]
                 ],
               ),
@@ -55,12 +63,16 @@ class InkuruSummaryWidget extends StatelessWidget {
               child: TextWidget.headline3(
                 inkuru.title,
                 align: TextAlign.start,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
               ),
             ),
             verticalSpaceSmall,
             Align(
               alignment: Alignment.centerLeft,
-              child: TextWidget.body(summary),
+              child: TextWidget.body(
+                summary,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
             ),
           ],
         ),

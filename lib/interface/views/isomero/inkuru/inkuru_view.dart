@@ -19,17 +19,18 @@ class InkuruView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
+            centerTitle: true,
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
                 size: 25,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
               onPressed: viewModel.navigatorPop,
             ),
             title: TextWidget.headline3(
               inkuru.title,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
             actions: [
               IconButton(
@@ -39,7 +40,7 @@ class InkuruView extends StatelessWidget {
                       ? Icons.bookmark_added
                       : Icons.bookmark_add_outlined,
                   size: 25,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               )
             ],
@@ -47,40 +48,40 @@ class InkuruView extends StatelessWidget {
           body: WebCenteredWidget(
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   verticalSpaceSmall,
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 30.0,
                     ),
-                    child: TextWidget.body(inkuru.content),
+                    child: TextWidget.body(
+                      inkuru.content,
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
                   ),
-                  if (inkuru.author != '-') ...[
-                    verticalSpaceMedium,
+                  verticalSpaceMedium,
+                  if (inkuru.author != '') ...[
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 30.0,
                       ),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: TextWidget.body(
-                          inkuru.author,
-                          fontWeight: 2,
-                        ),
+                      child: TextWidget.body(
+                        inkuru.author,
+                        fontWeight: 2,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
+                    verticalSpaceTiny,
                   ],
                   if (inkuru.tags != []) ...[
-                    verticalSpaceSmall,
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 30.0,
                       ),
-                      child: Align(
-                        alignment: Alignment.bottomRight,
-                        child: TextWidget.caption(
-                          inkuru.tags.join(', '),
-                        ),
+                      child: TextWidget.caption(
+                        inkuru.tags.join(', '),
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
                   ],

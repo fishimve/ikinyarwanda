@@ -24,19 +24,19 @@ class TaggedIsomeroView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
+            centerTitle: true,
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back,
                 size: 25,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
               onPressed: viewModel.navigateBack,
             ),
             title: TextWidget.headline3(
               tagTitle,
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.onPrimary,
             ),
-            centerTitle: false,
             actions: [
               IconButton(
                 onPressed: () {
@@ -47,13 +47,14 @@ class TaggedIsomeroView extends StatelessWidget {
                       readInkuru: viewModel.navigateToInkuruView,
                       favorites: viewModel.favorites,
                       searchLabel: 'Shakisha',
+                      context: context,
                     ),
                   );
                 },
                 icon: Icon(
                   Icons.search,
                   size: 25.0,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
             ],

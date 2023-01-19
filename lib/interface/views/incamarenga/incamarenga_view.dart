@@ -17,6 +17,7 @@ class IncamarengaView extends StatelessWidget {
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           elevation: 0,
+          centerTitle: true,
           title: TextButton(
             style: TextButton.styleFrom(
               minimumSize: Size.zero,
@@ -24,38 +25,34 @@ class IncamarengaView extends StatelessWidget {
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             ),
             onPressed: viewModel.showAboutDialog,
-            child: const TextWidget.headline1('Incamarenga'),
+            child: TextWidget.headline1(
+              'Incamarenga',
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
           ),
         ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()
             : WebCenteredWidget(
                 child: SafeArea(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: viewModel.incamarenga.length,
-                          padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                          itemBuilder: (context, index) => ExpansionTile(
-                            tilePadding: const EdgeInsets.symmetric(
-                              horizontal: 8.0,
-                            ),
-                            childrenPadding:
-                                const EdgeInsets.fromLTRB(12, 0, 12, 12),
-                            title: TextWidget.body(
-                              viewModel.incamarenga[index].statement,
-                            ),
-                            children: [
-                              TextWidget.body(
-                                viewModel.incamarenga[index].explaination,
-                              ),
-                            ],
-                          ),
-                        ),
+                  child: ListView.builder(
+                    itemCount: viewModel.incamarenga.length,
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    itemBuilder: (context, index) => ExpansionTile(
+                      tilePadding: const EdgeInsets.symmetric(
+                        horizontal: 8.0,
                       ),
-                    ],
+                      childrenPadding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                      title: TextWidget.body(
+                        viewModel.incamarenga[index].statement,
+                      ),
+                      children: [
+                        TextWidget.body(
+                          viewModel.incamarenga[index].explaination,
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
