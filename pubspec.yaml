@@ -22,29 +22,29 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^1.0.0
-  flutter_native_splash: ^2.2.19
+  # flutter_native_splash: ^2.2.19
   flutter_test:
     sdk: flutter
-  icons_launcher: ^2.1.0
+  # icons_launcher: ^2.1.0
 
-icons_launcher:
-  image_path: "assets/icons/iOS_icon.png"
-  platforms:
-    android:
-      enable: false
-    ios:
-      enable: true
-      remove_alpha_ios: true
+# icons_launcher:
+#   image_path: "assets/icons/iOS_icon.png"
+#   platforms:
+#     android:
+#       enable: false
+#     ios:
+#       enable: true
+#       remove_alpha_ios: true
 
-flutter_native_splash:
-  color: "#FFFFFF"
-  image_ios: "assets/icons/iOS_icon.png"
-  ios_content_mode: center
-  android: false
-  ios: true
-  web: false
-  android_12:
-    color: "#FFFFFF"
+# flutter_native_splash:
+#   color: "#FFFFFF"
+#   image_ios: "assets/icons/iOS_icon.png"
+#   ios_content_mode: center
+#   android: false
+#   ios: true
+#   web: false
+#   android_12:
+#     color: "#FFFFFF"
 
 flutter:
   uses-material-design: true

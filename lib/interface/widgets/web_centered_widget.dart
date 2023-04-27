@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class WebCenteredWidget extends StatelessWidget {
   final Widget child;
@@ -12,13 +13,17 @@ class WebCenteredWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveBuilder(
       builder: (context, sizingInfo) {
-        return Align(
-          alignment: Alignment.topCenter,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 600),
-            child: child,
-          ),
-        );
+        if (kIsWeb) {
+          return Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: child,
+            ),
+          );
+        } else {
+          return child;
+        }
       },
     );
   }
