@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ikinyarwanda/interface/widgets/appbar_title_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/circular_progress_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
@@ -17,20 +18,8 @@ class IncamarengaView extends StatelessWidget {
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.primary,
           centerTitle: true,
-          title: TextButton(
-            style: TextButton.styleFrom(
-              minimumSize: Size.zero,
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            onPressed: viewModel.showAboutDialog,
-            child: TextWidget.headline1(
-              'Incamarenga',
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-          ),
+          title: const AppBarTitleWidget(title: 'Incamarenga'),
         ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()

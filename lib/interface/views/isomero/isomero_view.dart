@@ -1,3 +1,4 @@
+import 'package:ikinyarwanda/interface/widgets/appbar_title_widget.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/interface/widgets/circular_progress_widget.dart';
@@ -19,19 +20,10 @@ class IsomeroView extends StatelessWidget {
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.primary,
           centerTitle: true,
-          title: TextButton(
-            style: TextButton.styleFrom(
-              minimumSize: Size.zero,
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
+          title: AppBarTitleWidget(
             onPressed: viewModel.showAboutDialog,
-            child: TextWidget.headline1(
-              'Isomero',
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
+            title: 'Isomero',
           ),
         ),
         body: viewModel.isBusy

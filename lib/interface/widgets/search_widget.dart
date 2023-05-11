@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
 import 'package:ikinyarwanda/models/inkuru.dart';
@@ -27,7 +29,9 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
 
   @override
   TextStyle? get searchFieldStyle => headline3Style.apply(
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Platform.isIOS
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.onPrimary,
         decoration: TextDecoration.none,
       );
 
@@ -36,18 +40,29 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
     final theme = Theme.of(context);
     return theme.copyWith(
       appBarTheme: AppBarTheme(
-        color: Theme.of(context).colorScheme.primary,
+        elevation: 0,
+        color: Platform.isIOS
+            ? Theme.of(context).colorScheme.onPrimary
+            : Theme.of(context).colorScheme.primary,
         titleTextStyle: headline3Style,
       ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: headline3Style.apply(
-            color: Theme.of(context).colorScheme.onPrimary),
+          color: Platform.isIOS
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onPrimary,
+        ),
         labelStyle: headline3Style.apply(
-            color: Theme.of(context).colorScheme.onPrimary),
+          color: Platform.isIOS
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onPrimary,
+        ),
         border: InputBorder.none,
       ),
       textSelectionTheme: TextSelectionThemeData(
-        cursorColor: Theme.of(context).colorScheme.onPrimary,
+        cursorColor: Platform.isIOS
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.onPrimary,
       ),
     );
   }
@@ -59,7 +74,9 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
         icon: Icon(
           Icons.clear,
           size: 22.0,
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: Platform.isIOS
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onPrimary,
         ),
         onPressed: () {
           query = '';
@@ -72,9 +89,11 @@ class SearchWidget extends SearchDelegate<Inkuru?> {
   Widget buildLeading(BuildContext context) {
     return IconButton(
       icon: Icon(
-        Icons.arrow_back,
+        Icons.adaptive.arrow_back,
         size: 22.0,
-        color: Theme.of(context).colorScheme.onPrimary,
+        color: Platform.isIOS
+            ? Theme.of(context).colorScheme.primary
+            : Theme.of(context).colorScheme.onPrimary,
       ),
       onPressed: () {
         close(context, null);

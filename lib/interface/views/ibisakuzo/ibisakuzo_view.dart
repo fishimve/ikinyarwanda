@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ikinyarwanda/interface/widgets/appbar_title_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/button_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/circular_progress_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/dots_indicator.dart';
@@ -46,19 +47,7 @@ class _IbisakuzoViewState extends State<IbisakuzoView>
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: TextButton(
-            style: TextButton.styleFrom(
-              minimumSize: Size.zero,
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            onPressed: viewModel.showAboutDialog,
-            child: TextWidget.headline1(
-              'Sakwe Sakwe?',
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-          ),
+          title: const AppBarTitleWidget(title: 'Sakwe Sakwe?'),
         ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()

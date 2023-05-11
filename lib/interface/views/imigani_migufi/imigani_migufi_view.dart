@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:ikinyarwanda/interface/widgets/appbar_title_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
 import 'package:stacked/stacked.dart';
@@ -20,20 +21,8 @@ class ImiganiMigufiView extends StatelessWidget {
       builder: (context, viewModel, child) => Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.primary,
           centerTitle: true,
-          title: TextButton(
-            style: TextButton.styleFrom(
-              minimumSize: Size.zero,
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
-            onPressed: viewModel.showAboutDialog,
-            child: TextWidget.headline1(
-              'Imigani migufi',
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
-          ),
+          title: const AppBarTitleWidget(title: 'Imigani migufi'),
         ),
         body: viewModel.isBusy
             ? const CircularProgressWidget()

@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,6 +42,11 @@ class Ikinyarwanda extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: false,
         colorScheme: lightColorScheme,
+        appBarTheme: AppBarTheme(
+          color: Platform.isIOS
+              ? const Color(0xFFFFFFFF)
+              : const Color(0xFF8F4E00),
+        ),
       ),
       darkTheme: ThemeData(
         useMaterial3: false,

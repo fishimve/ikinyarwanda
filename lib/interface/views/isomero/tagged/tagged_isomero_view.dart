@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ikinyarwanda/interface/widgets/appbar_leading_widget.dart';
+import 'package:ikinyarwanda/interface/widgets/appbar_title_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/inkuru_summary_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/search_widget.dart';
-import 'package:ikinyarwanda/interface/widgets/text_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
 import 'package:stacked/stacked.dart';
 
@@ -26,19 +27,8 @@ class TaggedIsomeroView extends StatelessWidget {
           appBar: AppBar(
             elevation: 0,
             centerTitle: true,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                size: 25,
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
-              onPressed: viewModel.navigateBack,
-            ),
-            title: TextWidget.headline3(
-              tagTitle,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
+            leading: AppBarLeadingWidget(onPressed: viewModel.navigateBack),
+            title: AppBarTitleWidget(title: tagTitle),
             actions: [
               IconButton(
                 onPressed: () {
