@@ -1,5 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
 import 'package:stacked/stacked.dart';
 
@@ -17,6 +18,12 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
+      onViewModelReady: (viewModel) =>
+          SchedulerBinding.instance.addPostFrameCallback(
+        (timeStamp) {
+          viewModel.initializeRateMyApp(context);
+        },
+      ),
       builder: (context, viewModel, child) => Scaffold(
         primary: false,
         body: WebCenteredWidget(

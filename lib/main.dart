@@ -51,6 +51,11 @@ class Ikinyarwanda extends StatelessWidget {
       darkTheme: ThemeData(
         useMaterial3: false,
         colorScheme: darkColorScheme,
+        appBarTheme: AppBarTheme(
+          color: Platform.isIOS
+              ? const Color(0xFF4C2700)
+              : const Color(0xFFFFB77B),
+        ),
       ),
       themeMode: ThemeMode.system,
       navigatorKey: locator<NavigationService>().navigationKey,

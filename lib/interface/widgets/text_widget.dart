@@ -6,11 +6,13 @@ class TextWidget extends StatelessWidget {
   final TextStyle textStyle;
   final TextAlign textAlign;
   final Color? color;
+  final TextOverflow? textOverflow;
 
   const TextWidget.headline1(
     this.text, {
     this.color,
     Key? key,
+    this.textOverflow,
     TextAlign align = TextAlign.start,
   })  : textStyle = headline1Style,
         textAlign = align,
@@ -20,6 +22,7 @@ class TextWidget extends StatelessWidget {
     this.text, {
     this.color,
     Key? key,
+    this.textOverflow,
     TextAlign align = TextAlign.start,
   })  : textStyle = headline2Style,
         textAlign = align,
@@ -30,6 +33,7 @@ class TextWidget extends StatelessWidget {
     this.color,
     Key? key,
     TextAlign align = TextAlign.start,
+    this.textOverflow,
   })  : textStyle = headline3Style,
         textAlign = align,
         super(key: key);
@@ -41,6 +45,7 @@ class TextWidget extends StatelessWidget {
     TextAlign align = TextAlign.start,
     int? fontWeight,
     Color? bgColor,
+    this.textOverflow,
   })  : textStyle = bodyStyle.apply(
           fontWeightDelta: fontWeight ?? 0,
           backgroundColor: bgColor,
@@ -52,6 +57,7 @@ class TextWidget extends StatelessWidget {
     this.color,
     Key? key,
     TextAlign align = TextAlign.start,
+    this.textOverflow,
   })  : textStyle = captionStyle,
         textAlign = align,
         super(key: key);
@@ -61,5 +67,6 @@ class TextWidget extends StatelessWidget {
         text,
         style: textStyle.apply(color: color),
         textAlign: textAlign,
+        overflow: textOverflow,
       );
 }

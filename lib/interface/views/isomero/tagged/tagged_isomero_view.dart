@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ikinyarwanda/interface/widgets/appbar_leading_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/appbar_title_widget.dart';
+import 'package:ikinyarwanda/interface/widgets/donation_buttons_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/inkuru_summary_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/search_widget.dart';
 import 'package:ikinyarwanda/interface/widgets/web_centered_widget.dart';
+import 'package:ikinyarwanda/shared/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 
 import 'tagged_isomero_view_model.dart';
@@ -24,6 +26,12 @@ class TaggedIsomeroView extends StatelessWidget {
       builder: (context, viewModel, child) {
         final tagTitle = tag == 'AAA' ? 'Ibyo ukunda gusoma' : tag;
         return Scaffold(
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: const Padding(
+            padding: basePadding,
+            child: DonationButtonsWidget(),
+          ),
           appBar: AppBar(
             elevation: 0,
             centerTitle: true,

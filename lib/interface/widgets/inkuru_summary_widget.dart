@@ -41,6 +41,7 @@ class InkuruSummaryWidget extends StatelessWidget {
                     inkuru.author == ''
                         ? inkuru.tags.join(', ')
                         : '${inkuru.author} | ${inkuru.tags.join(', ')}',
+                    textOverflow: TextOverflow.ellipsis,
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
                   if (isFavorite) ...[

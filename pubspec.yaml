@@ -12,9 +12,11 @@ dependencies:
   animations: ^2.0.7
   flutter:
     sdk: flutter
+  flutter_donation_buttons: ^0.1.6
   flutter_web_plugins:
     sdk: flutter
   get_it: ^7.2.0
+  rate_my_app: ^1.1.4
   responsive_builder: ^0.4.3
   shared_preferences: ^2.0.18
   stacked: ^3.1.0+2
@@ -25,8 +27,6 @@ dev_dependencies:
   # flutter_native_splash: ^2.2.19
   flutter_test:
     sdk: flutter
-  # icons_launcher: ^2.1.0
-
 # icons_launcher:
 #   image_path: "assets/icons/iOS_icon.png"
 #   platforms:
@@ -35,7 +35,6 @@ dev_dependencies:
 #     ios:
 #       enable: true
 #       remove_alpha_ios: true
-
 # flutter_native_splash:
 #   color: "#FFFFFF"
 #   image_ios: "assets/icons/iOS_icon.png"
@@ -45,7 +44,6 @@ dev_dependencies:
 #   web: false
 #   android_12:
 #     color: "#FFFFFF"
-
 flutter:
   uses-material-design: true
 
